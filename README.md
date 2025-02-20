@@ -16,3 +16,13 @@ docker compose up -d
 npm install 
 ``` 
 
+4. Correr las migraciones para crear las entidades
+``` bash
+npm run migration:run 
+```
+
+5. Correr el proyecto en modo desarrollo
+``` bash
+npm run start:dev 
+``` 
+
