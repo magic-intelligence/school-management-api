@@ -1,6 +1,7 @@
 import { Student } from "src/modules/student/domain/student";
 import { StudentTypeormEntity } from "../entities/student.typeorm.entity";
 import { PersonMapper } from "./person.mapper";
+import { StudentFamilyMapper } from "./student-family.mapper";
 
 export class StudentMapper{
     static toDomain(typeormEntity: StudentTypeormEntity): Student{
@@ -23,10 +24,13 @@ export class StudentMapper{
         student.updatedAt = typeormEntity.updatedAt;
         // student.parentFamily = typeormEntity.parentFamily ? new ParentFamily(typeormEntity.parentFamily) : null;
         student.person = PersonMapper.toDomain(typeormEntity.person);
+        student.studentFamilies = StudentFamilyMapper.toDomainList(typeormEntity.studentFamilies);
         // student.group = typeormEntity.group ? new Group(typeormEntity.group) : null;
         // student.service = typeormEntity.service ? new Service(typeormEntity.service) : null;
         return student;
     }
+
+
 
     static toPersistence(domainEntity: Student): StudentTypeormEntity{
         const typeormEntity = new StudentTypeormEntity();
@@ -48,5 +52,13 @@ export class StudentMapper{
         typeormEntity.updatedAt = domainEntity.updatedAt;
         typeormEntity.person = PersonMapper.toPersistence(domainEntity.person);
         return typeormEntity;
+    }
+
+    static toDomainList(typeormEntities: StudentTypeormEntity[]): Student[]{
+            return typeormEntities?.map((typeormEntity) => this.toDomain(typeormEntity));
+    }
+
+    static toPersistenceList(domainEntities: Student[]): StudentTypeormEntity[]{
+        return domainEntities?.map((domainEntity) => this.toPersistence(domainEntity));
     }
 }

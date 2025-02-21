@@ -1,6 +1,7 @@
 import { BaseDomain } from "src/shared/types/base/base.domain";
 import { FamilyStatus } from "./enums/family.status";
 import { Person } from "src/modules/person/domain/person";
+import { StudentFamily } from "src/modules/student-family/domain/student-family";
 
 export class Student extends BaseDomain{
     graceMinutes?: number;
@@ -16,4 +17,5 @@ export class Student extends BaseDomain{
     allergyDescription: string;
     familyStatus: FamilyStatus;
     person: Person;
+    studentFamilies: StudentFamily[];
 }

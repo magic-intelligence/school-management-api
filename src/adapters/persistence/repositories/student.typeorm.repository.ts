@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { Student } from "../../../modules/student/domain/student";
 import { StudentRepository } from "../../../modules/student/domain/student.repository"
 import { Repository } from "typeorm";
@@ -8,6 +8,7 @@ import { StudentMapper } from "../mappers/student.mapper";
 
 @Injectable()
 export class StudentTypeOrmRepository implements StudentRepository{
+    private logger = new Logger('StudentTypeOrmRepository');
     constructor(
         @InjectRepository(StudentTypeormEntity)
         private readonly studentRepository: Repository<StudentTypeormEntity>, 
@@ -23,13 +24,15 @@ export class StudentTypeOrmRepository implements StudentRepository{
             // Convertimos de vuelta a entidad de dominio
             return StudentMapper.toDomain(savedEntity);
         } catch (error) {
+            this.logger.error(error);
             console.log(error);
             throw new BadRequestException(error.detail);
         }
     }
     
     async findAll(): Promise<Student[]> {
-        return this.studentRepository.find();
+        const studentsPersistence = await this.studentRepository.find();
+        return StudentMapper.toDomainList(studentsPersistence);
     }
     findById(id: string): Promise<Student> {
         throw new Error("Method not implemented.");

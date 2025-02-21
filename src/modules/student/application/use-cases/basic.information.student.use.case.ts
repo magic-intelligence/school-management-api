@@ -2,7 +2,6 @@ import { Inject, Injectable } from "@nestjs/common";
 import { STUDENT_REPOSITORY, StudentRepository } from "../../domain/student.repository";
 import { Student } from "../../domain/student";
 import { CreateStudentDTO } from "src/adapters/http/dtos/student/create.student.dto";
-import { CreatePersonForStudent } from "src/modules/person/application/use-case/create.person.for.student";
 
 @Injectable()
 export class BasicInformationStudentUseCase{

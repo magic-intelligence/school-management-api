@@ -2,11 +2,13 @@
 // import { ParentFamily } from "src/modules/parent-family/domain/parent-family.entity";
 // import { Person } from "src/modules/person/domain/person.entity";
 // import { Service } from "src/modules/service/domain/service.entity";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 
 import { BaseTypeOrmEntity } from "../../../infraestructure/database/typeorm/base/base.typeorm.entity";
 import { FamilyStatus } from "src/modules/student/domain/enums/family.status";
 import { PersonTypeormEntity } from "./person.typeorm.entity";
+import { StudentFamily } from "src/modules/student-family/domain/student-family";
+import { StudentFamilyTypeormEntity } from "./student-family.typeorm.entity";
 
 @Entity({name: 'student'})
 export class StudentTypeormEntity extends BaseTypeOrmEntity{
@@ -35,9 +37,8 @@ export class StudentTypeormEntity extends BaseTypeOrmEntity{
     @Column({name: 'family_status', type: 'enum', enum: FamilyStatus, enumName: 'family_status_enum'})
     familyStatus: FamilyStatus;
 
-    // @ManyToOne(()=> ParentFamily, (parentFamily)=> parentFamily.students)
-    // @JoinColumn({name: 'parent_family_id'})
-    // parentFamily: ParentFamily;
+    @OneToMany(()=> StudentFamilyTypeormEntity, (studentFamily)=> studentFamily.student)
+    studentFamilies: StudentFamilyTypeormEntity[];
 
     @OneToOne(()=> PersonTypeormEntity)
     @JoinColumn({name: 'person_id'})
