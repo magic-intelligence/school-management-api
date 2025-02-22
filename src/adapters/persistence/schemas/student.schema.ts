@@ -1,17 +1,14 @@
-// import { Group } from "src/modules/group/domain/group.entity";
-// import { ParentFamily } from "src/modules/parent-family/domain/parent-family.entity";
-// import { Person } from "src/modules/person/domain/person.entity";
-// import { Service } from "src/modules/service/domain/service.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
+import { Column, Entity as Schema, JoinColumn, OneToMany, OneToOne } from "typeorm";
 
-import { BaseTypeOrmEntity } from "../../../infraestructure/database/typeorm/base/base.typeorm.entity";
+import { BaseSchema } from "../../../infraestructure/database/typeorm/base/base.schema";
 import { FamilyStatus } from "src/modules/student/domain/enums/family.status";
-import { PersonTypeormEntity } from "./person.typeorm.entity";
-import { StudentFamily } from "src/modules/student-family/domain/student-family";
-import { StudentFamilyTypeormEntity } from "./student-family.typeorm.entity";
+import { PersonSchema } from "./person.schema";
+import { StudentFamilySchema } from "./student-family.schema";
 
-@Entity({name: 'student'})
-export class StudentTypeormEntity extends BaseTypeOrmEntity{
+@Schema({name: 'student'})
+export class StudentSchema extends BaseSchema{
+    @Column({name: 'nickname', type: 'varchar', nullable: true})
+    nickname?: string;
     @Column({name: 'grace_minutes', type: 'int', nullable: true})
     graceMinutes?: number;
     @Column({name: 'enrollment_mount', type: 'double precision', nullable: true})
@@ -33,22 +30,14 @@ export class StudentTypeormEntity extends BaseTypeOrmEntity{
     @Column({name: 'brothers_number', type: 'int', nullable: false})
     brothersNumber: number;
     @Column({name: 'allergy_description', type: 'text', nullable: true})
-    allergyDescription: string;
+    allergyDescription?: string;
     @Column({name: 'family_status', type: 'enum', enum: FamilyStatus, enumName: 'family_status_enum'})
     familyStatus: FamilyStatus;
 
-    @OneToMany(()=> StudentFamilyTypeormEntity, (studentFamily)=> studentFamily.student)
-    studentFamilies: StudentFamilyTypeormEntity[];
+    @OneToMany(()=> StudentFamilySchema, (studentFamily)=> studentFamily.student)
+    studentFamilies: StudentFamilySchema[];
 
-    @OneToOne(()=> PersonTypeormEntity)
+    @OneToOne(()=> PersonSchema)
     @JoinColumn({name: 'person_id'})
-    person: PersonTypeormEntity;
-
-    // @OneToOne(()=> Group,{nullable: true})
-    // @JoinColumn({name: 'group_id'})
-    // group?: Group;
-
-    // @OneToOne(()=> Service, {nullable: true})
-    // @JoinColumn({name: 'service_id'})
-    // service?: Service;
+    person: PersonSchema;
 }

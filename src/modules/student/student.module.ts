@@ -1,23 +1,23 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { STUDENT_REPOSITORY } from "./domain/student.repository";
-import { StudentTypeOrmRepository } from "src/adapters/persistence/repositories/student.typeorm.repository";
+import { STUDENT_REPOSITORY } from "./domain/repositories/student.repository";
+import { StudentRepositoryImpl } from "src/adapters/persistence/repositories/student.repository.impl";
 import { BasicInformationStudentUseCase } from "./application/use-cases/basic.information.student.use.case";
 import { StudentController } from "src/adapters/http/controllers/student.controller";
-import { StudentTypeormEntity } from "src/adapters/persistence/entities/student.typeorm.entity";
+import { StudentSchema } from "src/adapters/persistence/schemas/student.schema";
 import { PersonModule } from "../person/person.module";
 import { BasicInformationStudentFacade } from "./application/facades/basic.information.student.facade";
 
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([StudentTypeormEntity]),
+        TypeOrmModule.forFeature([StudentSchema]),
         PersonModule,
     ],
     providers:[
         {
             provide: STUDENT_REPOSITORY,
-            useClass: StudentTypeOrmRepository
+            useClass: StudentRepositoryImpl
         },
         BasicInformationStudentUseCase,
         BasicInformationStudentFacade

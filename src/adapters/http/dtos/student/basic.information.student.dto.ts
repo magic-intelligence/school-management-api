@@ -1,8 +1,12 @@
-import { IsDate, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from "class-validator";
+import { IsDate, IsEnum, IsInt, IsISO8601, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from "class-validator";
 import { PersonGender } from "src/modules/person/domain/enums/person.gender";
 import { FamilyStatus } from "src/modules/student/domain/enums/family.status";
 
 export class BasicInformationStudentDTO {
+    @IsString()
+    @MinLength(1)
+    @IsOptional()
+    nickname?: string;
     @IsString()
     @MinLength(1)
     @IsNotEmpty()
@@ -15,7 +19,7 @@ export class BasicInformationStudentDTO {
     @MinLength(1)
     @IsNotEmpty()
     maternalSurname: string;
-    @IsDate()
+    @IsISO8601()
     @IsOptional()
     birthday?: Date;
     @IsOptional()

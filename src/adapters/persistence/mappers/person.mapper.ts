@@ -1,8 +1,8 @@
 import { Person } from "src/modules/person/domain/person";
-import { PersonTypeormEntity } from "../entities/person.typeorm.entity";
+import { PersonSchema } from "../schemas/person.schema";
 
 export class PersonMapper{
-    static toDomain(typeormEntity: PersonTypeormEntity ): Person {
+    static toDomain(typeormEntity: PersonSchema ): Person {
         const person = new Person();
         person.id = typeormEntity.id;
         person.name = typeormEntity.name;
@@ -17,8 +17,8 @@ export class PersonMapper{
         return person;
     }
 
-    static toPersistence(domainEntity: Person ): PersonTypeormEntity {
-        const typeormEntity = new PersonTypeormEntity;
+    static toPersistence(domainEntity: Person ): PersonSchema {
+        const typeormEntity = new PersonSchema;
         typeormEntity.id = domainEntity.id;
         typeormEntity.name = domainEntity.name;
         typeormEntity.paternalSurname = domainEntity.paternalSurname;

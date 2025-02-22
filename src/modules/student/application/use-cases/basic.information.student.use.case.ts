@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { STUDENT_REPOSITORY, StudentRepository } from "../../domain/student.repository";
-import { Student } from "../../domain/student";
+import { STUDENT_REPOSITORY, StudentRepository } from "../../domain/repositories/student.repository";
+import { Student } from "../../domain/entities/student";
 import { CreateStudentDTO } from "src/adapters/http/dtos/student/create.student.dto";
 
 @Injectable()
@@ -12,7 +12,8 @@ export class BasicInformationStudentUseCase{
 
     async execute (dto: CreateStudentDTO){
 
-        const student = new Student(); 
+        const student = new Student();
+        student.nickname = dto.nickname;
         student.entryTime = dto.entryTime;
         student.exitTime = dto.exitTime;
         student.brothersNumber = dto.brothersNumber;

@@ -1,64 +1,64 @@
-import { Student } from "src/modules/student/domain/student";
-import { StudentTypeormEntity } from "../entities/student.typeorm.entity";
+import { Student } from "src/modules/student/domain/entities/student";
+import { StudentSchema } from "../schemas/student.schema";
 import { PersonMapper } from "./person.mapper";
 import { StudentFamilyMapper } from "./student-family.mapper";
 
 export class StudentMapper{
-    static toDomain(typeormEntity: StudentTypeormEntity): Student{
-        const student = new Student();
-        student.id = typeormEntity.id;
-        student.graceMinutes = typeormEntity.graceMinutes;
-        student.enrollmentMount = typeormEntity.enrollmentMount;
-        student.enrollmentDueDate = typeormEntity.enrollmentDueDate;
-        student.monthlyMount = typeormEntity.monthlyMount;
-        student.monthlyDueDate = typeormEntity.monthlyDueDate;
-        student.materialMount = typeormEntity.materialMount;
-        student.materialDueDate = typeormEntity.materialDueDate;
-        student.entryTime = typeormEntity.entryTime;
-        student.exitTime = typeormEntity.exitTime;
-        student.brothersNumber = typeormEntity.brothersNumber;
-        student.allergyDescription = typeormEntity.allergyDescription;
-        student.familyStatus = typeormEntity.familyStatus;
-        student.isActive = typeormEntity.isActive;
-        student.createdAt = typeormEntity.createdAt;
-        student.updatedAt = typeormEntity.updatedAt;
-        // student.parentFamily = typeormEntity.parentFamily ? new ParentFamily(typeormEntity.parentFamily) : null;
-        student.person = PersonMapper.toDomain(typeormEntity.person);
-        student.studentFamilies = StudentFamilyMapper.toDomainList(typeormEntity.studentFamilies);
-        // student.group = typeormEntity.group ? new Group(typeormEntity.group) : null;
-        // student.service = typeormEntity.service ? new Service(typeormEntity.service) : null;
-        return student;
+    static toDomain(studentSchema: StudentSchema): Student{
+        const studentEntity = new Student();
+        studentEntity.id = studentSchema.id;
+        studentEntity.nickname = studentSchema.nickname;
+        studentEntity.graceMinutes = studentSchema.graceMinutes;
+        studentEntity.enrollmentMount = studentSchema.enrollmentMount;
+        studentEntity.enrollmentDueDate = studentSchema.enrollmentDueDate;
+        studentEntity.monthlyMount = studentSchema.monthlyMount;
+        studentEntity.monthlyDueDate = studentSchema.monthlyDueDate;
+        studentEntity.materialMount = studentSchema.materialMount;
+        studentEntity.materialDueDate = studentSchema.materialDueDate;
+        studentEntity.entryTime = studentSchema.entryTime;
+        studentEntity.exitTime = studentSchema.exitTime;
+        studentEntity.brothersNumber = studentSchema.brothersNumber;
+        studentEntity.allergyDescription = studentSchema.allergyDescription;
+        studentEntity.familyStatus = studentSchema.familyStatus;
+        studentEntity.isActive = studentSchema.isActive;
+        studentEntity.createdAt = studentSchema.createdAt;
+        studentEntity.updatedAt = studentSchema.updatedAt;
+
+        studentEntity.person = PersonMapper.toDomain(studentSchema.person);
+        studentEntity.studentFamilies = StudentFamilyMapper.toDomainList(studentSchema.studentFamilies);
+        return studentEntity;
     }
 
 
 
-    static toPersistence(domainEntity: Student): StudentTypeormEntity{
-        const typeormEntity = new StudentTypeormEntity();
-        typeormEntity.id = domainEntity.id;
-        typeormEntity.graceMinutes = domainEntity.graceMinutes;
-        typeormEntity.enrollmentMount = domainEntity.enrollmentMount;
-        typeormEntity.enrollmentDueDate = domainEntity.enrollmentDueDate;
-        typeormEntity.monthlyMount = domainEntity.monthlyMount;
-        typeormEntity.monthlyDueDate = domainEntity.monthlyDueDate;
-        typeormEntity.materialMount = domainEntity.materialMount;
-        typeormEntity.materialDueDate = domainEntity.materialDueDate;
-        typeormEntity.entryTime = domainEntity.entryTime;
-        typeormEntity.exitTime = domainEntity.exitTime;
-        typeormEntity.brothersNumber = domainEntity.brothersNumber;
-        typeormEntity.allergyDescription = domainEntity.allergyDescription;
-        typeormEntity.familyStatus = domainEntity.familyStatus;
-        typeormEntity.isActive = domainEntity.isActive;
-        typeormEntity.createdAt = domainEntity.createdAt;
-        typeormEntity.updatedAt = domainEntity.updatedAt;
-        typeormEntity.person = PersonMapper.toPersistence(domainEntity.person);
-        return typeormEntity;
+    static toPersistence(studentEntity: Student): StudentSchema{
+        const studentSchema = new StudentSchema();
+        studentSchema.id = studentEntity.id;
+        studentSchema.nickname = studentEntity.nickname;
+        studentSchema.graceMinutes = studentEntity.graceMinutes;
+        studentSchema.enrollmentMount = studentEntity.enrollmentMount;
+        studentSchema.enrollmentDueDate = studentEntity.enrollmentDueDate;
+        studentSchema.monthlyMount = studentEntity.monthlyMount;
+        studentSchema.monthlyDueDate = studentEntity.monthlyDueDate;
+        studentSchema.materialMount = studentEntity.materialMount;
+        studentSchema.materialDueDate = studentEntity.materialDueDate;
+        studentSchema.entryTime = studentEntity.entryTime;
+        studentSchema.exitTime = studentEntity.exitTime;
+        studentSchema.brothersNumber = studentEntity.brothersNumber;
+        studentSchema.allergyDescription = studentEntity.allergyDescription;
+        studentSchema.familyStatus = studentEntity.familyStatus;
+        studentSchema.isActive = studentEntity.isActive;
+        studentSchema.createdAt = studentEntity.createdAt;
+        studentSchema.updatedAt = studentEntity.updatedAt;
+        studentSchema.person = PersonMapper.toPersistence(studentEntity.person);
+        return studentSchema;
     }
 
-    static toDomainList(typeormEntities: StudentTypeormEntity[]): Student[]{
-            return typeormEntities?.map((typeormEntity) => this.toDomain(typeormEntity));
+    static toDomainList(typeormEntities: StudentSchema[]): Student[]{
+            return typeormEntities?.map((studentSchema) => this.toDomain(studentSchema));
     }
 
-    static toPersistenceList(domainEntities: Student[]): StudentTypeormEntity[]{
-        return domainEntities?.map((domainEntity) => this.toPersistence(domainEntity));
+    static toPersistenceList(domainEntities: Student[]): StudentSchema[]{
+        return domainEntities?.map((studentEntity) => this.toPersistence(studentEntity));
     }
 }

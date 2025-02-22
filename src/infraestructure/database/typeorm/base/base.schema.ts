@@ -1,6 +1,6 @@
 import { Column, PrimaryGeneratedColumn } from "typeorm";
 
-export abstract class BaseTypeOrmEntity{
+export abstract class BaseSchema{
     @PrimaryGeneratedColumn('uuid', {name: 'id'})
     id: string;
     @Column({name: 'is_active', default: true, nullable: false})

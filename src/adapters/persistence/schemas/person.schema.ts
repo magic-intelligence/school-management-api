@@ -1,9 +1,9 @@
-import { BaseTypeOrmEntity } from "src/infraestructure/database/typeorm/base/base.typeorm.entity";
+import { BaseSchema } from "src/infraestructure/database/typeorm/base/base.schema";
 import { PersonGender } from "src/modules/person/domain/enums/person.gender";
-import { Column, Entity } from "typeorm";
+import { Column, Entity as Schema } from "typeorm";
 
-@Entity({name: 'person'})
-export class PersonTypeormEntity extends BaseTypeOrmEntity {
+@Schema({name: 'person'})
+export class PersonSchema extends BaseSchema {
     @Column({name: 'name', nullable: false})
     name: string;
     @Column({name: 'paternal_surname', nullable: false})

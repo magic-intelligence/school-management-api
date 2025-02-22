@@ -2,15 +2,15 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { Person } from "src/modules/person/domain/person";
 import { PersonRepository } from "src/modules/person/domain/person.repository";
 import { Repository } from "typeorm";
-import { PersonTypeormEntity } from "../entities/person.typeorm.entity";
+import { PersonSchema } from "../schemas/person.schema";
 import { InjectRepository } from "@nestjs/typeorm";
 import { PersonMapper } from "../mappers/person.mapper";
 
 @Injectable()
-export class PersonTypeormRepository implements PersonRepository{
+export class PersonRepositoryImpl implements PersonRepository{
     constructor(
-        @InjectRepository(PersonTypeormEntity)
-        private readonly personRepository: Repository<PersonTypeormEntity>
+        @InjectRepository(PersonSchema)
+        private readonly personRepository: Repository<PersonSchema>
     ){}
     async save(person: Person): Promise<Person> {
         try {

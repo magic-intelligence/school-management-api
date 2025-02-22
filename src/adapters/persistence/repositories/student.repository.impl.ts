@@ -1,17 +1,17 @@
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
-import { Student } from "../../../modules/student/domain/student";
-import { StudentRepository } from "../../../modules/student/domain/student.repository"
+import { Student } from "../../../modules/student/domain/entities/student";
+import { StudentRepository } from "../../../modules/student/domain/repositories/student.repository"
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { StudentTypeormEntity } from "../entities/student.typeorm.entity";
+import { StudentSchema } from "../schemas/student.schema";
 import { StudentMapper } from "../mappers/student.mapper";
 
 @Injectable()
-export class StudentTypeOrmRepository implements StudentRepository{
-    private logger = new Logger('StudentTypeOrmRepository');
+export class StudentRepositoryImpl implements StudentRepository{
+    private logger = new Logger('StudentRepositoryImpl');
     constructor(
-        @InjectRepository(StudentTypeormEntity)
-        private readonly studentRepository: Repository<StudentTypeormEntity>, 
+        @InjectRepository(StudentSchema)
+        private readonly studentRepository: Repository<StudentSchema>, 
     ){}
     async save(student: Student): Promise<Student> {
         try {

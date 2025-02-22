@@ -4,3 +4,5 @@ export enum FamilyStatus{
     Widowed = "Viudo(a)",
     SingleParent = "Padre o madre soltero(a)",
 }
+
+// cambiar a ValueObjects

@@ -1,4 +1,4 @@
-import { Student } from "./student";
+import { Student } from "../entities/student";
 
 export const STUDENT_REPOSITORY = 'STUDENT_REPOSITORY';
 

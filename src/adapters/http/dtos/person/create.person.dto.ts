@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsDate, IsEnum, IsISO8601, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 import { PersonGender } from "src/modules/person/domain/enums/person.gender";
 
 export class CreatePersonDTO{
@@ -14,7 +14,7 @@ export class CreatePersonDTO{
     @MinLength(1)
     @IsNotEmpty()
     maternalSurname: string;
-    @IsDate()
+    @IsISO8601()
     @IsOptional()
     birthday?: Date;
     @IsOptional()
