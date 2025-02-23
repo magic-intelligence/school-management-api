@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { BasicInformationStudentDTO } from "../dtos/student/basic.information.student.dto";
-import { BasicInformationStudentFacade } from "src/modules/student/application/facades/basic.information.student.facade";
+import { BasicInformationStudentFacade } from "src/core/student/application/facades/basic.information.student.facade";
 
 @Controller('students')
 export class StudentController{

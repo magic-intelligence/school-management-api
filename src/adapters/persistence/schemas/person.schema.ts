@@ -1,5 +1,5 @@
 import { BaseSchema } from "src/infraestructure/database/typeorm/base/base.schema";
-import { PersonGender } from "src/modules/person/domain/enums/person.gender";
+import { PersonGender } from "src/shared/value-object/person.gender";
 import { Column, Entity as Schema } from "typeorm";
 
 @Schema({name: 'person'})

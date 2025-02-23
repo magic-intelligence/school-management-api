@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
-import { Student } from "../../../modules/student/domain/entities/student";
-import { StudentRepository } from "../../../modules/student/domain/repositories/student.repository"
+import { Student } from "../../../core/student/domain/entities/student.entity";
+import { StudentRepository } from "../../../core/student/domain/repositories/student.repository"
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { StudentSchema } from "../schemas/student.schema";

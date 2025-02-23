@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { Person } from "src/modules/person/domain/person";
-import { PersonRepository } from "src/modules/person/domain/person.repository";
+import { Person } from "src/core/person/domain/entities/person.entity";
+import { PersonRepository } from "src/core/person/domain/repositories/person.repository";
 import { Repository } from "typeorm";
 import { PersonSchema } from "../schemas/person.schema";
 import { InjectRepository } from "@nestjs/typeorm";

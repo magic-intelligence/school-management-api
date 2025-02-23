@@ -1,9 +1,8 @@
 import { Column, Entity as Schema, JoinColumn, OneToMany, OneToOne } from "typeorm";
-
 import { BaseSchema } from "../../../infraestructure/database/typeorm/base/base.schema";
-import { FamilyStatus } from "src/modules/student/domain/enums/family.status";
 import { PersonSchema } from "./person.schema";
 import { StudentFamilySchema } from "./student-family.schema";
+import { FamilyStatusSchema } from "./family-status.schema";
 
 @Schema({name: 'student'})
 export class StudentSchema extends BaseSchema{
@@ -31,8 +30,10 @@ export class StudentSchema extends BaseSchema{
     brothersNumber: number;
     @Column({name: 'allergy_description', type: 'text', nullable: true})
     allergyDescription?: string;
-    @Column({name: 'family_status', type: 'enum', enum: FamilyStatus, enumName: 'family_status_enum'})
-    familyStatus: FamilyStatus;
+   
+    @OneToOne(()=> FamilyStatusSchema)
+    @JoinColumn({name: 'family_status_id'})
+    familyStatus: FamilyStatusSchema;
 
     @OneToMany(()=> StudentFamilySchema, (studentFamily)=> studentFamily.student)
     studentFamilies: StudentFamilySchema[];

@@ -1,6 +1,6 @@
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Matches, MinLength, } from "class-validator";
-import { FamilyStatus } from "../../../../modules/student/domain/enums/family.status";
-import { Person } from "src/modules/person/domain/person";
+import { FamilyStatus } from "../../../../core/student/domain/enums/family.status";
+import { Person } from "src/core/person/domain/entities/person.entity";
 
 export class CreateStudentDTO {
     @IsString()

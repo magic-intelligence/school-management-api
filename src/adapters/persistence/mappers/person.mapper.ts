@@ -1,34 +1,34 @@
-import { Person } from "src/modules/person/domain/person";
+import { PersonEntity } from "src/core/person/domain/entities/person.entity";
 import { PersonSchema } from "../schemas/person.schema";
 
 export class PersonMapper{
-    static toDomain(typeormEntity: PersonSchema ): Person {
-        const person = new Person();
-        person.id = typeormEntity.id;
-        person.name = typeormEntity.name;
-        person.paternalSurname = typeormEntity.paternalSurname;
-        person.maternalSurname = typeormEntity.maternalSurname;
-        person.phoneNumber = typeormEntity.phoneNumber;
-        person.gender = typeormEntity.gender;
-        person.birthday = typeormEntity.birthday;
-        person.isActive = typeormEntity.isActive;
-        person.createdAt = typeormEntity.createdAt;
-        person.updatedAt = typeormEntity.updatedAt;
-        return person;
+    static toDomain(personEntity: PersonSchema ): PersonEntity {
+        const personSchema = new PersonEntity();
+        personSchema.id = personEntity.id;
+        personSchema.name = personEntity.name;
+        personSchema.paternalSurname = personEntity.paternalSurname;
+        personSchema.maternalSurname = personEntity.maternalSurname;
+        personSchema.phoneNumber = personEntity.phoneNumber;
+        personSchema.gender = personEntity.gender;
+        personSchema.birthday = personEntity.birthday;
+        personSchema.isActive = personEntity.isActive;
+        personSchema.createdAt = personEntity.createdAt;
+        personSchema.updatedAt = personEntity.updatedAt;
+        return personSchema;
     }
 
-    static toPersistence(domainEntity: Person ): PersonSchema {
-        const typeormEntity = new PersonSchema;
-        typeormEntity.id = domainEntity.id;
-        typeormEntity.name = domainEntity.name;
-        typeormEntity.paternalSurname = domainEntity.paternalSurname;
-        typeormEntity.maternalSurname = domainEntity.maternalSurname;
-        typeormEntity.phoneNumber = domainEntity.phoneNumber;
-        typeormEntity.gender = domainEntity.gender;
-        typeormEntity.birthday = domainEntity.birthday;
-        typeormEntity.isActive = domainEntity.isActive;
-        typeormEntity.createdAt = domainEntity.createdAt;
-        typeormEntity.updatedAt = domainEntity.updatedAt;
-        return typeormEntity;
+    static toPersistence(personEntity: PersonEntity ): PersonSchema {
+        const personSchema = new PersonSchema;
+        personSchema.id = personEntity.id;
+        personSchema.name = personEntity.name;
+        personSchema.paternalSurname = personEntity.paternalSurname;
+        personSchema.maternalSurname = personEntity.maternalSurname;
+        personSchema.phoneNumber = personEntity.phoneNumber;
+        personSchema.gender = personEntity.gender;
+        personSchema.birthday = personEntity.birthday;
+        personSchema.isActive = personEntity.isActive;
+        personSchema.createdAt = personEntity.createdAt;
+        personSchema.updatedAt = personEntity.updatedAt;
+        return personSchema;
     }
 }

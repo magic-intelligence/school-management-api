@@ -1,6 +1,6 @@
 import { IsDate, IsEnum, IsInt, IsISO8601, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from "class-validator";
-import { PersonGender } from "src/modules/person/domain/enums/person.gender";
-import { FamilyStatus } from "src/modules/student/domain/enums/family.status";
+import { PersonGender } from "src/shared/value-object/person.gender";
+import { FamilyStatus } from "src/core/student/domain/enums/family.status";
 
 export class BasicInformationStudentDTO {
     @IsString()

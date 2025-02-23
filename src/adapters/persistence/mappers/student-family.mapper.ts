@@ -1,34 +1,34 @@
-import { StudentFamily } from "src/modules/student-family/domain/student-family";
+import { StudentFamilyEntity } from "src/core/student-family/domain/entities/student-family.entity";
 import { StudentFamilySchema } from "../schemas/student-family.schema";
 import { StudentMapper } from "./student.mapper";
-import { FamilierMapper } from "./familier.mapper";
+import { ParentFamilyMapper } from "./parent-family.mapper";
 
 export class StudentFamilyMapper{
-    static toDomain(typeormEntity: StudentFamilySchema): StudentFamily{
-        const studentFamily = new StudentFamily();
-        studentFamily.id = typeormEntity.id;
-        studentFamily.createdAt = typeormEntity.createdAt;
-        studentFamily.updatedAt = typeormEntity.updatedAt;
-        studentFamily.familier = FamilierMapper.toDomain(typeormEntity.familier);
-        studentFamily.student = StudentMapper.toDomain(typeormEntity.student);
-        return studentFamily;
+    static toDomain(studentFamilySchema: StudentFamilySchema): StudentFamilyEntity{
+        const studentFamilyEntity = new StudentFamilyEntity();
+        studentFamilyEntity.id = studentFamilySchema.id;
+        studentFamilyEntity.createdAt = studentFamilySchema.createdAt;
+        studentFamilyEntity.updatedAt = studentFamilySchema.updatedAt;
+        studentFamilyEntity.familier = ParentFamilyMapper.toDomain(studentFamilySchema.familier);
+        studentFamilyEntity.student = StudentMapper.toDomain(studentFamilySchema.student);
+        return studentFamilyEntity;
     }
 
-    static toPersistence(domainEntity: StudentFamily): StudentFamilySchema{
-        const typeormEntity = new StudentFamilySchema();
-        typeormEntity.id = domainEntity.id;
-        typeormEntity.createdAt = domainEntity.createdAt;
-        typeormEntity.updatedAt = domainEntity.updatedAt;
-        typeormEntity.familier = FamilierMapper.toPersistence(domainEntity.familier);
-        typeormEntity.student = StudentMapper.toPersistence(domainEntity.student);
-        return typeormEntity;
+    static toPersistence(studentFamilyEntity: StudentFamilyEntity): StudentFamilySchema{
+        const studentFamilySchema = new StudentFamilySchema();
+        studentFamilySchema.id = studentFamilyEntity.id;
+        studentFamilySchema.createdAt = studentFamilyEntity.createdAt;
+        studentFamilySchema.updatedAt = studentFamilyEntity.updatedAt;
+        studentFamilySchema.familier = ParentFamilyMapper.toPersistence(studentFamilyEntity.familier);
+        studentFamilySchema.student = StudentMapper.toPersistence(studentFamilyEntity.student);
+        return studentFamilySchema;
     }
 
-    static toDomainList(typeormEntities: StudentFamilySchema[]): StudentFamily[]{
-        return typeormEntities?.map((typeormEntity) => this.toDomain(typeormEntity));
+    static toDomainList(studentFamiliesSchema: StudentFamilySchema[]): StudentFamilyEntity[]{
+        return studentFamiliesSchema?.map((studentFamilySchema) => this.toDomain(studentFamilySchema));
     }
 
-    static toPersistenceList(domainEntities: StudentFamily[]): StudentFamilySchema[]{
-        return domainEntities?.map((domainEntity) => this.toPersistence(domainEntity));
+    static toPersistenceList(studentFamiliesEntity: StudentFamilyEntity[]): StudentFamilySchema[]{
+        return studentFamiliesEntity?.map((studentFamilyEntity) => this.toPersistence(studentFamilyEntity));
     }
 }
