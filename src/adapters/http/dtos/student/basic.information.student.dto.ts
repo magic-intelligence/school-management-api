@@ -1,6 +1,5 @@
-import { IsDate, IsEnum, IsInt, IsISO8601, IsNotEmpty, IsOptional, IsString, Matches, MinLength } from "class-validator";
+import { IsEnum, IsInt, IsISO8601, IsNotEmpty, IsOptional, IsString, IsUUID, Matches, MinLength } from "class-validator";
 import { PersonGender } from "src/shared/value-object/person.gender";
-import { FamilyStatus } from "src/core/student/domain/enums/family.status";
 
 export class BasicInformationStudentDTO {
     @IsString()
@@ -42,7 +41,13 @@ export class BasicInformationStudentDTO {
     @IsString()
     @IsOptional()
     allergyDescription?: string;
-    @IsEnum(FamilyStatus)
     @IsNotEmpty()
-    familyStatus: FamilyStatus;
+    @IsUUID()
+    familyStatusId: string;
+    @IsNotEmpty()
+    @IsUUID()
+    branchId: string;
+    @IsNotEmpty()
+    @IsUUID()
+    parentFamilyId: string;
 }

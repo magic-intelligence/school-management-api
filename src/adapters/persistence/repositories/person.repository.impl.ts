@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { Person } from "src/core/person/domain/entities/person.entity";
+import { PersonEntity } from "src/core/person/domain/entities/person.entity";
 import { PersonRepository } from "src/core/person/domain/repositories/person.repository";
 import { Repository } from "typeorm";
 import { PersonSchema } from "../schemas/person.schema";
@@ -12,10 +12,11 @@ export class PersonRepositoryImpl implements PersonRepository{
         @InjectRepository(PersonSchema)
         private readonly personRepository: Repository<PersonSchema>
     ){}
-    async save(person: Person): Promise<Person> {
+    async save(person: PersonEntity): Promise<PersonEntity> {
         try {
-            const persisteEntity = PersonMapper.toPersistence(person);
 
+            const persisteEntity = PersonMapper.toPersistence(person);
+            
             const savedEntity = await this.personRepository.save( persisteEntity );
 
             return PersonMapper.toDomain( savedEntity );
@@ -24,10 +25,10 @@ export class PersonRepositoryImpl implements PersonRepository{
             throw new BadRequestException(error.detail);
         }
     }
-    findAll(): Promise<Person[]> {
+    findAll(): Promise<PersonEntity[]> {
         throw new Error("Method not implemented.");
     }
-    findById(id: string): Promise<Person> {
+    findById(id: string): Promise<PersonEntity> {
         throw new Error("Method not implemented.");
     }
     delete(id: string): Promise<void> {

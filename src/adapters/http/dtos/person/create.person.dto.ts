@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsISO8601, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
+import { IsDate, IsEnum, IsISO8601, IsNotEmpty, IsOptional, IsString, IsUUID, MinLength } from "class-validator";
 import { PersonGender } from "src/shared/value-object/person.gender";
 
 export class CreatePersonDTO{
@@ -23,4 +23,7 @@ export class CreatePersonDTO{
     @IsEnum(PersonGender)
     @IsNotEmpty()
     gender: PersonGender;
+    @IsNotEmpty()
+    @IsUUID()
+    branchId: string;
 }

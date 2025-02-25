@@ -1,6 +1,5 @@
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Matches, MinLength, } from "class-validator";
-import { FamilyStatus } from "../../../../core/student/domain/enums/family.status";
-import { Person } from "src/core/person/domain/entities/person.entity";
+import { IsInt, IsNotEmpty, IsOptional, IsString, IsUUID, Matches, MinLength, } from "class-validator";
+import { PersonEntity } from "src/core/person/domain/entities/person.entity";
 
 export class CreateStudentDTO {
     @IsString()
@@ -26,11 +25,10 @@ export class CreateStudentDTO {
     @IsOptional()
     allergyDescription?: string;
 
-    @IsEnum(FamilyStatus)
     @IsNotEmpty()
-    familyStatus: FamilyStatus;
-
     @IsUUID()
+    familyStatusId: string;
+
     @IsOptional()
-    person: Person;
+    person: PersonEntity;
 }

@@ -1,6 +1,8 @@
 import { BaseSchema } from "src/infraestructure/database/typeorm/base/base.schema";
 import { PersonGender } from "src/shared/value-object/person.gender";
-import { Column, Entity as Schema } from "typeorm";
+import { Column, JoinColumn, ManyToOne, OneToMany, OneToOne, Entity as Schema } from "typeorm";
+import { BranchSchema } from "./branch.schema";
+import { AddressSchema } from "./address.schema";
 
 @Schema({name: 'person'})
 export class PersonSchema extends BaseSchema {
@@ -16,4 +18,12 @@ export class PersonSchema extends BaseSchema {
     phoneNumber?: string;
     @Column({name: 'gender', type: 'enum', enum: PersonGender, nullable: false})
     gender: PersonGender;
+
+    @ManyToOne(()=> BranchSchema, (branch)=> branch.persons)
+    @JoinColumn({name: 'branch_id'})
+    branch: BranchSchema;
+
+    @OneToOne(()=> AddressSchema,{nullable: true})
+    @JoinColumn({name: 'address_id'})
+    address?: AddressSchema;
 }

@@ -8,12 +8,12 @@ import { StudentFamilySchema } from "./student-family.schema";
 export class ParentFamilySchema extends BaseSchema{
     @OneToOne(()=> PersonSchema)
     @JoinColumn({name: 'person_id'})
-    person: PersonSchema;
+    person?: PersonSchema;
 
     @OneToOne(()=> RelationshipSchema)
     @JoinColumn({name: 'relationship_id'})
-    relationship: RelationshipSchema;
+    relationship?: RelationshipSchema;
 
     @OneToMany(()=> StudentFamilySchema, (studentFamily)=> studentFamily.familier)
-    studentFamily: StudentFamilySchema[];
+    studentFamily?: StudentFamilySchema[];
 }

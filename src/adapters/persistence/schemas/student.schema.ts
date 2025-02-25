@@ -23,11 +23,11 @@ export class StudentSchema extends BaseSchema{
     @Column({name: 'material_due_date', type: 'timestamp', nullable: true})
     materialDueDate?: Date;
     @Column({name: 'entry_time', type: 'time', nullable: false})
-    entryTime: string;
+    entryTime?: string;
     @Column({name: 'exit_time', type: 'time', nullable: false})
-    exitTime: string;
+    exitTime?: string;
     @Column({name: 'brothers_number', type: 'int', nullable: false})
-    brothersNumber: number;
+    brothersNumber?: number;
     @Column({name: 'allergy_description', type: 'text', nullable: true})
     allergyDescription?: string;
    

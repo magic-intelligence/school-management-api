@@ -7,12 +7,14 @@ import { StudentController } from "src/adapters/http/controllers/student.control
 import { StudentSchema } from "src/adapters/persistence/schemas/student.schema";
 import { PersonModule } from "../person/person.module";
 import { BasicInformationStudentFacade } from "./application/facades/basic.information.student.facade";
+import { StudentFamilyModule } from "../student-family/student-family.module";
 
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([StudentSchema]),
         PersonModule,
+        StudentFamilyModule
     ],
     providers:[
         {

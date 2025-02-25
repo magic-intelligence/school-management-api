@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
-import { Student } from "../../../core/student/domain/entities/student.entity";
+import { StudentEntity } from "../../../core/student/domain/entities/student.entity";
 import { StudentRepository } from "../../../core/student/domain/repositories/student.repository"
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -13,7 +13,7 @@ export class StudentRepositoryImpl implements StudentRepository{
         @InjectRepository(StudentSchema)
         private readonly studentRepository: Repository<StudentSchema>, 
     ){}
-    async save(student: Student): Promise<Student> {
+    async save(student: StudentEntity): Promise<StudentEntity> {
         try {
             // Convertimos la entidad de dominio a entidad TypeORM
             const persistenceEntity = StudentMapper.toPersistence(student);
@@ -30,11 +30,11 @@ export class StudentRepositoryImpl implements StudentRepository{
         }
     }
     
-    async findAll(): Promise<Student[]> {
+    async findAll(): Promise<StudentEntity[]> {
         const studentsPersistence = await this.studentRepository.find();
         return StudentMapper.toDomainList(studentsPersistence);
     }
-    findById(id: string): Promise<Student> {
+    findById(id: string): Promise<StudentEntity> {
         throw new Error("Method not implemented.");
     }
     delete(id: string): Promise<void> {

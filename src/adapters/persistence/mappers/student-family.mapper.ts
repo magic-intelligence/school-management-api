@@ -9,7 +9,7 @@ export class StudentFamilyMapper{
         studentFamilyEntity.id = studentFamilySchema.id;
         studentFamilyEntity.createdAt = studentFamilySchema.createdAt;
         studentFamilyEntity.updatedAt = studentFamilySchema.updatedAt;
-        studentFamilyEntity.familier = ParentFamilyMapper.toDomain(studentFamilySchema.familier);
+        studentFamilyEntity.parentFamily = ParentFamilyMapper.toDomain(studentFamilySchema.familier);
         studentFamilyEntity.student = StudentMapper.toDomain(studentFamilySchema.student);
         return studentFamilyEntity;
     }
@@ -19,7 +19,7 @@ export class StudentFamilyMapper{
         studentFamilySchema.id = studentFamilyEntity.id;
         studentFamilySchema.createdAt = studentFamilyEntity.createdAt;
         studentFamilySchema.updatedAt = studentFamilyEntity.updatedAt;
-        studentFamilySchema.familier = ParentFamilyMapper.toPersistence(studentFamilyEntity.familier);
+        studentFamilySchema.familier = ParentFamilyMapper.toPersistence(studentFamilyEntity.parentFamily);
         studentFamilySchema.student = StudentMapper.toPersistence(studentFamilyEntity.student);
         return studentFamilySchema;
     }

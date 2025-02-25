@@ -1,4 +1,4 @@
-import { FamilyStatusEntity } from "src/core/student/domain/entities/family-status.entity";
+import { FamilyStatusEntity } from "src/core/family-status/domain/entities/family-status.entity";
 import { FamilyStatusSchema } from "../schemas/family-status.schema";
 
 export class FamilyStatusMapper{
