@@ -31,7 +31,7 @@ export class StudentSchema extends BaseSchema{
     @Column({name: 'allergy_description', type: 'text', nullable: true})
     allergyDescription?: string;
    
-    @Column({name: 'family_status_id', type: 'uuid', nullable: false})
+    @Column({name: 'family_status_id', type: 'uuid', nullable: false, unique: false})
     familyStatusId: string;
     @Column({name: 'person_id', type: 'uuid', nullable: false})
     personId: string;

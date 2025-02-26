@@ -7,6 +7,9 @@ import { RelationshipMapper } from "./relationship.mapper";
 export class ParentFamilyMapper {
     static toDomain(parentFamilySchema: ParentFamilySchema): ParentFamilyEntity {
         const parentFamilyEntity = plainToInstance(ParentFamilyEntity, parentFamilySchema);
+        
+        if( parentFamilySchema === undefined ) return parentFamilyEntity;
+        
         parentFamilyEntity.person = PersonMapper.toDomain(parentFamilySchema.person);
         parentFamilyEntity.relationship = RelationshipMapper.toDomain(parentFamilySchema.relationship);
         return parentFamilyEntity;
@@ -14,6 +17,9 @@ export class ParentFamilyMapper {
 
     static toPersistence(parentFamilyEntity: ParentFamilyEntity): ParentFamilySchema {
         const parentFamilySchema = plainToInstance(ParentFamilySchema, parentFamilyEntity);
+        
+        if( parentFamilyEntity === undefined ) return parentFamilySchema;
+
         parentFamilySchema.person = PersonMapper.toPersistence(parentFamilyEntity.person);
         parentFamilySchema.relationship = RelationshipMapper.toPersistence(parentFamilyEntity.relationship);
         return parentFamilySchema;

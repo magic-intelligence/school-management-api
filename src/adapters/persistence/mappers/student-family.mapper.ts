@@ -7,6 +7,9 @@ import { plainToInstance } from "class-transformer";
 export class StudentFamilyMapper{
     static toDomain(studentFamilySchema: StudentFamilySchema): StudentFamilyEntity {
         const studentFamilyEntity = plainToInstance(StudentFamilyEntity, studentFamilySchema);
+
+        if(studentFamilySchema === undefined) return studentFamilyEntity;
+
         studentFamilyEntity.parentFamily = ParentFamilyMapper.toDomain(studentFamilySchema.parentFamily);
         studentFamilyEntity.student = StudentMapper.toDomain(studentFamilySchema.student)
 
@@ -15,6 +18,9 @@ export class StudentFamilyMapper{
 
     static toPersistence(studentFamilyEntity: StudentFamilyEntity): StudentFamilySchema {
         const studentFamilySchema = plainToInstance(StudentFamilySchema, studentFamilyEntity);
+
+        if(studentFamilyEntity === undefined) return studentFamilySchema;
+
         studentFamilySchema.parentFamily = ParentFamilyMapper.toPersistence(studentFamilyEntity.parentFamily);
         studentFamilySchema.student = StudentMapper.toPersistence(studentFamilyEntity.student)
 

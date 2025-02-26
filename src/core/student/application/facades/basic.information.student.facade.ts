@@ -36,12 +36,15 @@ export class BasicInformationStudentFacade {
             allergyDescription: dto.allergyDescription,
             personId: person.id
         });
+        console.log(student);
 
-        await this.studentFamilyService.save({
+        const studentFamily = await this.studentFamilyService.save({
             parentFamilyId: dto.parentFamilyId,
             studentId: student.id
         });
-
+        console.log(studentFamily);
+        console.log(studentFamily.parentFamily);
+        
         return student;
     }
 }
