@@ -4,7 +4,6 @@ import { BasicInformationStudentDTO } from "src/adapters/http/dtos/student/basic
 import { StudentEntity } from "../../domain/entities/student.entity";
 import { Inject } from "@nestjs/common";
 import { StudentFamilyService } from "src/core/student-family/application/service/student-family.service";
-import { ParentFamilyEntity } from "src/core/parent-family/domain/entities/parent-family.entity";
 
 export class BasicInformationStudentFacade {
     constructor(
@@ -24,7 +23,8 @@ export class BasicInformationStudentFacade {
             gender: dto.gender,
             birthday: dto.birthday,
             phoneNumber: dto.phoneNumber,
-            branchId: dto.branchId
+            branchId: dto.branchId,
+            addressId: dto.addressId
         });
 
         const student = await this.basicInformationStudentUseCase.execute({
@@ -34,15 +34,12 @@ export class BasicInformationStudentFacade {
             brothersNumber: dto.brothersNumber,
             familyStatusId: dto.familyStatusId,
             allergyDescription: dto.allergyDescription,
-            person,
+            personId: person.id
         });
 
-        const parentFamily = new ParentFamilyEntity();
-        parentFamily.id = dto.parentFamilyId;
-
         await this.studentFamilyService.save({
-            parentFamily: parentFamily,
-            student
+            parentFamilyId: dto.parentFamilyId,
+            studentId: student.id
         });
 
         return student;

@@ -2,7 +2,7 @@ import { PersonEntity } from "src/core/person/domain/entities/person.entity";
 import { PersonSchema } from "../schemas/person.schema";
 import { BranchMapper } from "./branch.mapper";
 import { AddressMapper } from "./address.mapper";
-import { AddressEntity } from "src/core/address/domain/entities/address.entity";
+import { AddressSchema } from "../schemas";
 
 export class PersonMapper{
     static toDomain(personSchema: PersonSchema ): PersonEntity {
@@ -17,8 +17,12 @@ export class PersonMapper{
         personEntity.isActive = personSchema.isActive;
         personEntity.createdAt = personSchema.createdAt;
         personEntity.updatedAt = personSchema.updatedAt;
-        personEntity.branch = BranchMapper.toDomain(personSchema.branch)
-        personEntity.address = personSchema.address;
+        personEntity.branchId = personSchema.branchId;
+        personEntity.branch = BranchMapper.toDomain(personSchema.branch);
+        personEntity.addressId = personSchema.addressId;
+        personEntity.address = personSchema.address ?
+            AddressMapper.toDomain(personSchema.address): 
+            null;
         return personEntity;
     }
 
@@ -34,8 +38,12 @@ export class PersonMapper{
         personSchema.isActive = personEntity.isActive;
         personSchema.createdAt = personEntity.createdAt;
         personSchema.updatedAt = personEntity.updatedAt;
+        personSchema.branchId = personEntity.branchId;
         personSchema.branch = BranchMapper.toPersistence(personEntity.branch);
-        personSchema.address = personEntity.address;
+        personSchema.addressId = personEntity.addressId;
+        personSchema.address = personEntity.address ?
+            AddressMapper.toPersistence(personEntity.address):
+            null;
         return personSchema;
     }
 

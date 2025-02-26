@@ -5,12 +5,14 @@ import { PersonSchema } from "./person.schema";
 
 @Schema({name: 'branch'})
 export class BranchSchema extends BaseSchema{
+    @Column({name: 'address_id', type: 'uuid', nullable: false})
+    addressId: string;
     @Column({name: 'name', nullable: false})
     name: string;
     @OneToOne( ()=> AddressSchema )
     @JoinColumn({name: 'address_id'})
     address: AddressSchema;
 
-    @OneToMany(()=> PersonSchema, (person)=> person.branch)
+    @OneToMany(()=> PersonSchema, (person)=> person.branchId)
     persons: PersonSchema[];
 }

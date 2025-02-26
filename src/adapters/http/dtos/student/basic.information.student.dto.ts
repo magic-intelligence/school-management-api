@@ -50,4 +50,7 @@ export class BasicInformationStudentDTO {
     @IsNotEmpty()
     @IsUUID()
     parentFamilyId: string;
+    @IsNotEmpty()
+    @IsUUID()
+    addressId: string;
 }

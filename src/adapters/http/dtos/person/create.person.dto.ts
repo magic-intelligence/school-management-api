@@ -26,4 +26,7 @@ export class CreatePersonDTO{
     @IsNotEmpty()
     @IsUUID()
     branchId: string;
+    @IsOptional()
+    @IsUUID()
+    addressId?: string;
 }

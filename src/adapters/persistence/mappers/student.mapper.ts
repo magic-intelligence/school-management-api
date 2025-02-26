@@ -26,7 +26,7 @@ export class StudentMapper{
         
         studentEntity.familyStatus = FamilyStatusMapper.toDomain(studentSchema.familyStatus);
         studentEntity.person = PersonMapper.toDomain(studentSchema.person);
-        studentEntity.studentFamilies = StudentFamilyMapper.toDomainList(studentSchema.studentFamilies);
+        studentEntity.studentFamilies = StudentFamilyMapper.toDomainList(studentSchema.studentFamilies || []);
         return studentEntity;
     }
 
@@ -53,7 +53,7 @@ export class StudentMapper{
         
         studentSchema.familyStatus = FamilyStatusMapper.toPersistence(studentEntity.familyStatus);
         studentSchema.person = PersonMapper.toPersistence(studentEntity.person);
-        studentSchema.studentFamilies = StudentFamilyMapper.toPersistenceList(studentEntity.studentFamilies)
+        studentSchema.studentFamilies = StudentFamilyMapper.toPersistenceList(studentEntity.studentFamilies || [])
         return studentSchema;
     }
 

@@ -7,6 +7,7 @@ export class BranchMapper{
     static toDomain(branchSchema: BranchSchema): BranchEntity{
         const branchEntity = new BranchEntity();
         branchEntity.id = branchSchema.id;
+        branchEntity.addressId = branchSchema.addressId;
         branchEntity.name = branchSchema.name;
         branchEntity.isActive = branchSchema.isActive;
         branchEntity.createdAt = branchSchema.createdAt;
@@ -19,6 +20,7 @@ export class BranchMapper{
     static toPersistence(branchEntity: BranchEntity): BranchSchema{
         const branchSchema = new BranchSchema();
         branchSchema.id = branchEntity.id;
+        branchSchema.addressId = branchEntity.addressId;
         branchSchema.name = branchEntity.name;
         branchSchema.isActive = branchEntity.isActive;
         branchSchema.createdAt = branchEntity.createdAt;

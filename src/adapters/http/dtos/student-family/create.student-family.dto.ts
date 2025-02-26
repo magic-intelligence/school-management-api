@@ -4,7 +4,9 @@ import { StudentEntity } from "src/core/student/domain/entities/student.entity";
 
 export class CreateStudentFamilyDTO{
     @IsNotEmpty()
-    parentFamily: ParentFamilyEntity;
+    @IsUUID()
+    parentFamilyId: string;
     @IsNotEmpty()
-    student: StudentEntity;
+    @IsUUID()
+    studentId: string;
 }

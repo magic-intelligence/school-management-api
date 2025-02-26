@@ -4,6 +4,8 @@ import { BranchEntity } from "src/core/branch/domain/entities/branch.entity";
 import { AddressEntity } from "src/core/address/domain/entities/address.entity";
 
 export class PersonEntity extends BaseEntity{
+        branchId: string;
+        addressId?: string;
         name: string;
         paternalSurname: string;
         maternalSurname: string;
@@ -11,5 +13,5 @@ export class PersonEntity extends BaseEntity{
         phoneNumber?: string;
         gender: PersonGender;
         branch: BranchEntity;
-        address?: AddressEntity;
+        address?: AddressEntity | null;
 }

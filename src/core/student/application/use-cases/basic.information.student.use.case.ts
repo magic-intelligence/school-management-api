@@ -12,17 +12,15 @@ export class BasicInformationStudentUseCase{
     ){}
 
     async execute (dto: CreateStudentDTO){
-        const familyStatus = new FamilyStatusEntity();
-        familyStatus.id = dto.familyStatusId;
 
         const student = new StudentEntity();
         student.nickname = dto.nickname;
         student.entryTime = dto.entryTime;
         student.exitTime = dto.exitTime;
         student.brothersNumber = dto.brothersNumber;
-        student.familyStatus = familyStatus;
+        student.familyStatusId = dto.familyStatusId;
         student.entryTime = dto.entryTime;
-        student.person = dto.person;
+        student.personId = dto.personId;
         
         return this.studentRepository.save(student);
     }

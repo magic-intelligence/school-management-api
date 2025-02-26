@@ -30,5 +30,6 @@ export class CreateStudentDTO {
     familyStatusId: string;
 
     @IsOptional()
-    person: PersonEntity;
+    @IsUUID()
+    personId: string;
 }

@@ -6,6 +6,10 @@ import { AddressSchema } from "./address.schema";
 
 @Schema({name: 'person'})
 export class PersonSchema extends BaseSchema {
+    @Column({name: 'branch_id', type: 'uuid', nullable: false})
+    branchId: string;
+    @Column({name: 'address_id', type: 'uuid', nullable: true})
+    addressId?: string;
     @Column({name: 'name', nullable: false})
     name: string;
     @Column({name: 'paternal_surname', nullable: false})
@@ -25,5 +29,5 @@ export class PersonSchema extends BaseSchema {
 
     @OneToOne(()=> AddressSchema,{nullable: true})
     @JoinColumn({name: 'address_id'})
-    address?: AddressSchema;
+    address?: AddressSchema | null;
 }

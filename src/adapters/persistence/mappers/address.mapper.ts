@@ -4,7 +4,7 @@ import { AddressSchema } from "../schemas";
 export class AddressMapper {
     static toDomain(addressSchema: AddressSchema): AddressEntity {
         const addressEntity = new AddressEntity();
-        addressEntity.id = addressSchema.id; 
+        addressEntity.id = addressSchema.id;
         addressEntity.street = addressSchema.street; 
         addressEntity.interiorNumber = addressSchema.interiorNumber; 
         addressEntity.exteriorNumber = addressSchema.exteriorNumber; 

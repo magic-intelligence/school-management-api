@@ -4,7 +4,9 @@ import { StudentFamilyEntity } from "src/core/student-family/domain/entities/stu
 import { BaseEntity } from "src/shared/types/base/base.entity";
 
 export class ParentFamilyEntity extends BaseEntity{
-    person?: PersonEntity;
-    relationship?: RelationShipEntity;
-    studnetFamilies?: StudentFamilyEntity[];
+    personId: string;
+    relationshipId: string;
+    person: PersonEntity;
+    relationship: RelationShipEntity;
+    studentFamilies?: StudentFamilyEntity[];
 }

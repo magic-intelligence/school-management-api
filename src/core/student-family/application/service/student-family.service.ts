@@ -12,8 +12,8 @@ export class StudentFamilyService {
     async save(dto: CreateStudentFamilyDTO): Promise<StudentFamilyEntity> {
 
         const studentFamily = new StudentFamilyEntity();
-        studentFamily.parentFamily = dto.parentFamily;
-        studentFamily.student = dto.student;
+        studentFamily.parentFamilyId = dto.parentFamilyId;
+        studentFamily.studentId = dto.studentId;
         
         return await this.studentFamilyRepository.save( studentFamily);
     }

@@ -16,6 +16,7 @@ export class PersonRepositoryImpl implements PersonRepository{
         try {
 
             const persisteEntity = PersonMapper.toPersistence(person);
+            // const persisteEntity = this.personRepository.create(person);
             
             const savedEntity = await this.personRepository.save( persisteEntity );
 

@@ -2,7 +2,6 @@ import { CreatePersonDTO } from "src/adapters/http/dtos/person/create.person.dto
 import { PERSON_REPOSITORY, PersonRepository } from "../../domain/repositories/person.repository";
 import { Inject, Injectable } from "@nestjs/common";
 import { PersonEntity } from "../../domain/entities/person.entity";
-import { BranchEntity } from "src/core/branch/domain/entities/branch.entity";
 
 @Injectable()
 export class PersonService{
@@ -12,8 +11,6 @@ export class PersonService{
     ){}
 
     excecute(dto: CreatePersonDTO){
-        const branch = new BranchEntity();
-        branch.id = dto.branchId;
 
         const person = new PersonEntity();
         person.name = dto.name;
@@ -21,7 +18,8 @@ export class PersonService{
         person.maternalSurname = dto.maternalSurname;
         person.birthday = dto.birthday;
         person.gender = dto.gender;
-        person.branch = branch;
+        person.branchId = dto.branchId;
+        person.addressId = dto.addressId;
 
         return this.personRepository.save( person )
     }
