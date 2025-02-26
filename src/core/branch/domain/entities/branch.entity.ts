@@ -6,5 +6,5 @@ export class BranchEntity extends BaseEntity{
     addressId: string;
     name: string;
     address: AddressEntity;
-    persons: PersonEntity[];
+    persons?: PersonEntity[];
 }

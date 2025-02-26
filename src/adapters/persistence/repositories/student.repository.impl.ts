@@ -25,7 +25,6 @@ export class StudentRepositoryImpl implements StudentRepository{
             return StudentMapper.toDomain(savedEntity);
         } catch (error) {
             this.logger.error(error);
-            console.log(error);
             throw new BadRequestException(error.detail);
         }
     }

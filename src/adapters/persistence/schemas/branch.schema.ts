@@ -13,6 +13,6 @@ export class BranchSchema extends BaseSchema{
     @JoinColumn({name: 'address_id'})
     address: AddressSchema;
 
-    @OneToMany(()=> PersonSchema, (person)=> person.branchId)
-    persons: PersonSchema[];
+    @OneToMany(()=> PersonSchema, (person)=> person.branch)
+    persons?: PersonSchema[];
 }

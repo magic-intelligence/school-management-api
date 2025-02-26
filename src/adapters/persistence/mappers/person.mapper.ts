@@ -1,50 +1,24 @@
 import { PersonEntity } from "src/core/person/domain/entities/person.entity";
-import { PersonSchema } from "../schemas/person.schema";
+import { AddressSchema, BranchSchema, PersonSchema } from "../schemas";
+import { plainToInstance } from "class-transformer";
+import { BranchEntity } from "src/core/branch/domain/entities/branch.entity";
+import { AddressEntity } from "src/core/address/domain/entities/address.entity";
 import { BranchMapper } from "./branch.mapper";
 import { AddressMapper } from "./address.mapper";
-import { AddressSchema } from "../schemas";
 
 export class PersonMapper{
     static toDomain(personSchema: PersonSchema ): PersonEntity {
-        const personEntity = new PersonEntity();
-        personEntity.id = personSchema.id;
-        personEntity.name = personSchema.name;
-        personEntity.paternalSurname = personSchema.paternalSurname;
-        personEntity.maternalSurname = personSchema.maternalSurname;
-        personEntity.phoneNumber = personSchema.phoneNumber;
-        personEntity.gender = personSchema.gender;
-        personEntity.birthday = personSchema.birthday;
-        personEntity.isActive = personSchema.isActive;
-        personEntity.createdAt = personSchema.createdAt;
-        personEntity.updatedAt = personSchema.updatedAt;
-        personEntity.branchId = personSchema.branchId;
-        personEntity.branch = BranchMapper.toDomain(personSchema.branch);
-        personEntity.addressId = personSchema.addressId;
-        personEntity.address = personSchema.address ?
-            AddressMapper.toDomain(personSchema.address): 
-            null;
-        return personEntity;
+        const entity = plainToInstance(PersonEntity, personSchema)
+        entity.branch = BranchMapper.toDomain(personSchema.branch);
+        entity.address = personSchema.address ? AddressMapper.toDomain( personSchema.address) : null;
+        return entity;
     }
 
     static toPersistence(personEntity: PersonEntity ): PersonSchema {
-        const personSchema = new PersonSchema();
-        personSchema.id = personEntity.id;
-        personSchema.name = personEntity.name;
-        personSchema.paternalSurname = personEntity.paternalSurname;
-        personSchema.maternalSurname = personEntity.maternalSurname;
-        personSchema.phoneNumber = personEntity.phoneNumber;
-        personSchema.gender = personEntity.gender;
-        personSchema.birthday = personEntity.birthday;
-        personSchema.isActive = personEntity.isActive;
-        personSchema.createdAt = personEntity.createdAt;
-        personSchema.updatedAt = personEntity.updatedAt;
-        personSchema.branchId = personEntity.branchId;
-        personSchema.branch = BranchMapper.toPersistence(personEntity.branch);
-        personSchema.addressId = personEntity.addressId;
-        personSchema.address = personEntity.address ?
-            AddressMapper.toPersistence(personEntity.address):
-            null;
-        return personSchema;
+        const schema = plainToInstance(PersonSchema, personEntity);
+        schema.branch = BranchMapper.toPersistence(personEntity.branch);
+        schema.address = personEntity.address ? AddressMapper.toPersistence(personEntity.address) : null;
+        return schema;
     }
 
     static toDomainList(persons: PersonSchema[]): PersonEntity[] {

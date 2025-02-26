@@ -1,30 +1,21 @@
 import { ParentFamilyEntity } from "src/core/parent-family/domain/entities/parent-family.entity";
 import { ParentFamilySchema } from "../schemas/parent-family.schema";
+import { plainToInstance } from "class-transformer";
+import { PersonMapper } from "./person.mapper";
+import { RelationshipMapper } from "./relationship.mapper";
 
 export class ParentFamilyMapper {
     static toDomain(parentFamilySchema: ParentFamilySchema): ParentFamilyEntity {
-        const parentFamilyEntity = new ParentFamilyEntity();
-        parentFamilyEntity.id = parentFamilySchema.id;
-        parentFamilyEntity.personId = parentFamilySchema.personId;
-        parentFamilyEntity.person = parentFamilySchema.person;
-        parentFamilyEntity.relationshipId = parentFamilySchema.relationshipId;
-        parentFamilyEntity.relationship = parentFamilySchema.relationship;
-        parentFamilyEntity.createdAt = parentFamilySchema.createdAt;
-        parentFamilyEntity.updatedAt = parentFamilySchema.updatedAt;
-        parentFamilyEntity.isActive = parentFamilySchema.isActive;
+        const parentFamilyEntity = plainToInstance(ParentFamilyEntity, parentFamilySchema);
+        parentFamilyEntity.person = PersonMapper.toDomain(parentFamilySchema.person);
+        parentFamilyEntity.relationship = RelationshipMapper.toDomain(parentFamilySchema.relationship);
         return parentFamilyEntity;
     }
 
     static toPersistence(parentFamilyEntity: ParentFamilyEntity): ParentFamilySchema {
-        const parentFamilySchema = new ParentFamilySchema();
-        parentFamilySchema.id = parentFamilyEntity.id;
-        parentFamilySchema.personId = parentFamilyEntity.personId;
-        parentFamilySchema.person = parentFamilyEntity.person;
-        parentFamilySchema.relationshipId = parentFamilyEntity.relationshipId;
-        parentFamilySchema.relationship = parentFamilyEntity.relationship;
-        parentFamilySchema.createdAt = parentFamilyEntity.createdAt;
-        parentFamilySchema.updatedAt = parentFamilyEntity.updatedAt;
-        parentFamilySchema.isActive = parentFamilyEntity.isActive;
+        const parentFamilySchema = plainToInstance(ParentFamilySchema, parentFamilyEntity);
+        parentFamilySchema.person = PersonMapper.toPersistence(parentFamilyEntity.person);
+        parentFamilySchema.relationship = RelationshipMapper.toPersistence(parentFamilyEntity.relationship);
         return parentFamilySchema;
     }
 }

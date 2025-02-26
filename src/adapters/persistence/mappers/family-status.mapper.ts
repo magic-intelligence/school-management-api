@@ -1,26 +1,16 @@
 import { FamilyStatusEntity } from "src/core/family-status/domain/entities/family-status.entity";
-import { FamilyStatusSchema } from "../schemas/family-status.schema";
+import { FamilyStatusSchema } from "../schemas";
+import { plainToInstance } from "class-transformer";
+
 
 export class FamilyStatusMapper{
     static toDomain(familyStatusSchema: FamilyStatusSchema): FamilyStatusEntity{
-        const familyStatusEntity = new FamilyStatusEntity();
-        familyStatusEntity.id = familyStatusSchema.id;
-        familyStatusEntity.name = familyStatusSchema.name;
-        familyStatusEntity.description = familyStatusSchema.description;
-        familyStatusEntity.isActive = familyStatusSchema.isActive;
-        familyStatusEntity.createdAt = familyStatusSchema.createdAt;
-        familyStatusEntity.updatedAt = familyStatusSchema.updatedAt;
-        return familyStatusEntity;
+        const entity = plainToInstance(FamilyStatusEntity, familyStatusSchema);
+        return entity;
     }
 
     static toPersistence(familyStatusEntity: FamilyStatusEntity): FamilyStatusSchema{
-        const familyStatusSchema = new FamilyStatusSchema();
-        familyStatusSchema.id = familyStatusEntity.id;
-        familyStatusSchema.name = familyStatusEntity.name;
-        familyStatusSchema.description = familyStatusEntity.description;
-        familyStatusSchema.isActive = familyStatusEntity.isActive;
-        familyStatusSchema.createdAt = familyStatusEntity.createdAt;
-        familyStatusSchema.updatedAt = familyStatusEntity.updatedAt;
-        return familyStatusSchema;
+        const schema = plainToInstance(FamilyStatusSchema, familyStatusEntity);
+        return schema;
     }
 }

@@ -26,7 +26,7 @@ export class BasicInformationStudentFacade {
             branchId: dto.branchId,
             addressId: dto.addressId
         });
-
+        console.log(person);
         const student = await this.basicInformationStudentUseCase.execute({
             nickname: dto.nickname,
             entryTime: dto.entryTime,
