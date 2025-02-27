@@ -10,7 +10,7 @@ export class PersonService{
         private readonly personRepository: PersonRepository,
     ){}
 
-    excecute(dto: CreatePersonDTO){
+    save(dto: CreatePersonDTO){
 
         const person = new PersonEntity();
         person.name = dto.name;

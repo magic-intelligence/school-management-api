@@ -8,13 +8,15 @@ import { StudentSchema } from "src/adapters/persistence/schemas/student.schema";
 import { PersonModule } from "../person/person.module";
 import { BasicInformationStudentFacade } from "./application/facades/basic.information.student.facade";
 import { StudentFamilyModule } from "../student-family/student-family.module";
+import { TransactionModule } from "src/infraestructure/database/typeorm/transactions/transaction.module";
 
 
 @Module({
     imports: [
         TypeOrmModule.forFeature([StudentSchema]),
         PersonModule,
-        StudentFamilyModule
+        StudentFamilyModule,
+        TransactionModule
     ],
     providers:[
         {

@@ -22,14 +22,5 @@ import { TypeOMRTransaction } from './transactions/typeorm.transaction';
             }),
         }),
     ],
-    providers:[
-        {
-            provide: TRANSACTION_PORT,
-            useClass: TypeOMRTransaction
-        }
-    ],
-    exports:[
-        TRANSACTION_PORT
-    ]
 })
 export class TypeormConfigModule {}

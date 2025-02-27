@@ -14,7 +14,7 @@ export class StudentMapper {
         entity.person = PersonMapper.toDomain(studentSchema.person);
 
         entity.studentFamilies = studentSchema.studentFamilies
-            ? studentSchema.studentFamilies.map((studentFamily) => StudentFamilyMapper.toDomain(studentFamily))
+            ? StudentFamilyMapper.toDomainList(studentSchema.studentFamilies)
             : undefined;
 
         return entity;
@@ -29,7 +29,7 @@ export class StudentMapper {
         schema.person = PersonMapper.toPersistence(studentEntity.person);
 
         schema.studentFamilies = studentEntity.studentFamilies
-            ? studentEntity.studentFamilies.map((studentFamily) => StudentFamilyMapper.toPersistence(studentFamily))
+            ? StudentFamilyMapper.toPersistenceList(studentEntity.studentFamilies)
             : undefined;
 
         return schema;
