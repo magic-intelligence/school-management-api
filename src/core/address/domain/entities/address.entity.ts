@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/shared/types/base/base.entity";
+import { BaseEntity } from "src/shared/types/entities/base.entity";
 
 export class AddressEntity extends BaseEntity{
     postalCode: number;

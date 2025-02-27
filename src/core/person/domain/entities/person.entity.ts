@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/shared/types/base/base.entity";
+import { BaseEntity } from "src/shared/types/entities/base.entity";
 import { PersonGender } from "../../../../shared/value-object/person.gender";
 import { BranchEntity } from "src/core/branch/domain/entities/branch.entity";
 import { AddressEntity } from "src/core/address/domain/entities/address.entity";

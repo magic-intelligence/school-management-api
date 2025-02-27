@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/shared/types/base/base.entity";
+import { BaseEntity } from "src/shared/types/entities/base.entity";
 import { FamilyStatusEntity } from "../../../family-status/domain/entities/family-status.entity";
 import { PersonEntity } from "src/core/person/domain/entities/person.entity";
 import { StudentFamilyEntity } from "src/core/student-family/domain/entities/student-family.entity";
