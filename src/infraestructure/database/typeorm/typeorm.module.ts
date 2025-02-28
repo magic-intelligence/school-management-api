@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TRANSACTION_PORT } from 'src/shared/ports/transaction.port';
-import { TypeOMRTransaction } from './transactions/typeorm.transaction';
 
 @Module({
     imports: [

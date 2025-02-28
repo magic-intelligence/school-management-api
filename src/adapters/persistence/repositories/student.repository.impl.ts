@@ -15,13 +15,8 @@ export class StudentRepositoryImpl implements StudentRepository{
     ){}
     async save(student: StudentEntity): Promise<StudentEntity> {
         try {
-            // Convertimos la entidad de dominio a entidad TypeORM
             const persistenceEntity = StudentMapper.toPersistence(student);
-        
-            // Guardamos en la base de datos
             const savedEntity = await this.studentRepository.save(persistenceEntity);
-            
-            // Convertimos de vuelta a entidad de dominio
             return StudentMapper.toDomain(savedEntity);
         } catch (error) {
             this.logger.error(error);

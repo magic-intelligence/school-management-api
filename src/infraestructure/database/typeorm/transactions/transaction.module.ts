@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TRANSACTION_PORT } from 'src/shared/ports/transaction.port';
-import { TypeOMRTransaction } from './typeorm.transaction';
+import { TypeOrmTransaction } from './typeorm.transaction';
 
 @Module({
     providers:[
         {
             provide: TRANSACTION_PORT,
-            useClass: TypeOMRTransaction
+            useClass: TypeOrmTransaction
         }
     ],
     exports:[

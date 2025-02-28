@@ -27,9 +27,7 @@ export class BasicInformationStudentFacade {
                 maternalSurname: dto.maternalSurname,
                 gender: dto.gender,
                 birthday: dto.birthday,
-                phoneNumber: dto.phoneNumber,
-                branchId: dto.branchId,
-                addressId: dto.addressId
+                branchId: dto.branchId
             });
             this.logger.log(person);
             const student = await this.basicInformationStudentUseCase.execute({
@@ -42,7 +40,7 @@ export class BasicInformationStudentFacade {
                 personId: person.id
             });
             this.logger.log(student);
-    
+            
             const studentFamily = await this.studentFamilyService.save({
                 parentFamilyId: dto.parentFamilyId,
                 studentId: student.id

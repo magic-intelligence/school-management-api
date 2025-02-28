@@ -1,5 +1,5 @@
 import { IsEnum, IsInt, IsISO8601, IsNotEmpty, IsOptional, IsString, IsUUID, Matches, MinLength } from "class-validator";
-import { PersonGender } from "src/shared/value-object/person.gender";
+import { PersonGender } from "../../../../../src/shared/value-object/person.gender";
 
 export class BasicInformationStudentDTO {
     @IsString()
@@ -21,9 +21,6 @@ export class BasicInformationStudentDTO {
     @IsISO8601()
     @IsOptional()
     birthday?: Date;
-    @IsOptional()
-    @IsString()
-    phoneNumber?: string;
     @IsEnum(PersonGender)
     @IsNotEmpty()
     gender: PersonGender;
@@ -50,7 +47,4 @@ export class BasicInformationStudentDTO {
     @IsNotEmpty()
     @IsUUID()
     parentFamilyId: string;
-    @IsNotEmpty()
-    @IsUUID()
-    addressId: string;
 }
