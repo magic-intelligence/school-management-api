@@ -5,22 +5,26 @@ import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { StudentSchema } from "../schemas/student.schema";
 import { StudentMapper } from "../mappers/student.mapper";
+import { Transactional } from "src/infraestructure/database/typeorm/transactions/transactional.decorator";
+import { handlerExceptionRepository } from "src/shared/exceptions/handler.exception.repositories";
 
 @Injectable()
 export class StudentRepositoryImpl implements StudentRepository{
     private logger = new Logger('StudentRepositoryImpl');
     constructor(
         @InjectRepository(StudentSchema)
-        private readonly studentRepository: Repository<StudentSchema>, 
+        private readonly studentRepository: Repository<StudentSchema>,
+        private readonly transactional: Transactional,
     ){}
     async save(student: StudentEntity): Promise<StudentEntity> {
+        const manager = this.transactional.getManager();
+        const repo = manager.getRepository(StudentSchema);
         try {
             const persistenceEntity = StudentMapper.toPersistence(student);
-            const savedEntity = await this.studentRepository.save(persistenceEntity);
+            const savedEntity = await repo.save(persistenceEntity);
             return StudentMapper.toDomain(savedEntity);
         } catch (error) {
-            this.logger.error(error);
-            throw new BadRequestException(error.detail);
+            return handlerExceptionRepository(error);
         }
     }
     

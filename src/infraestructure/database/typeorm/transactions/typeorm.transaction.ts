@@ -1,23 +1,21 @@
 import { Injectable } from "@nestjs/common";
 import { TransactionPort } from "src/shared/ports/transaction.port";
-import { DataSource } from "typeorm";
+import { DataSource, EntityManager } from "typeorm";
+import { TransactionContext } from "./transaction.context";
 
 @Injectable()
 export class TypeOrmTransaction implements TransactionPort{
     constructor(
         private readonly dataSource: DataSource,
+        private readonly transactionContext: TransactionContext,
     ){}
-    
-    // run<T>(callback: () => Promise<T>): Promise<T> {
-    //     return this.dataSource.transaction(async ()=>{
-    //         return await callback();
-    //     });
-    // }
 
     async run<T>(callback: ()=> Promise<T>):Promise<T>{
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction(); // Inicio de la transacción
+
+        this.transactionContext.setManager(queryRunner.manager); 
 
         try {
             const result = await callback();

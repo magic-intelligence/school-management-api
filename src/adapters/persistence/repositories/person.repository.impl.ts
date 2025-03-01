@@ -5,19 +5,23 @@ import { Repository } from "typeorm";
 import { PersonSchema } from "../schemas/person.schema";
 import { InjectRepository } from "@nestjs/typeorm";
 import { PersonMapper } from "../mappers/person.mapper";
+import { Transactional } from "src/infraestructure/database/typeorm/transactions/transactional.decorator";
 
 @Injectable()
 export class PersonRepositoryImpl implements PersonRepository{
     constructor(
         @InjectRepository(PersonSchema)
-        private readonly personRepository: Repository<PersonSchema>
+        private readonly personRepository: Repository<PersonSchema>,
+        private readonly transactional: Transactional,
     ){}
     async save(person: PersonEntity): Promise<PersonEntity> {
+        const manager = this.transactional.getManager();
+        const repo = manager.getRepository(PersonSchema);
         try {
 
             const persisteEntity = PersonMapper.toPersistence(person);
             
-            const savedEntity = await this.personRepository.save( persisteEntity );
+            const savedEntity = await repo.save( persisteEntity );
 
             return PersonMapper.toDomain( savedEntity );
         } catch (error) {

@@ -4,10 +4,12 @@ import { StudentFamilySchema } from "src/adapters/persistence/schemas";
 import { STUDENT_FAMILY_REPOSITORY } from "./domain/repositories/student-family.repository";
 import { StudentFamilyRepositoryImpl } from "src/adapters/persistence/repositories/student-family.repository.impl";
 import { StudentFamilyService } from "./application/service/student-family.service";
+import { TransactionModule } from "src/infraestructure/database/typeorm/transactions/transaction.module";
 
 @Module({
     imports: [
             TypeOrmModule.forFeature([StudentFamilySchema]),
+            TransactionModule
         ],
         providers:[
             {
