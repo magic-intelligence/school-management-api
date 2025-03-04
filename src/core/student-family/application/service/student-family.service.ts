@@ -17,4 +17,9 @@ export class StudentFamilyService {
         
         return await this.studentFamilyRepository.save( studentFamily);
     }
+
+    async findAllByStudentId(id: string): Promise<StudentFamilyEntity[]>{
+        const student = await this.studentFamilyRepository.findAllByStudentId(id);
+        return student;
+    }
 }

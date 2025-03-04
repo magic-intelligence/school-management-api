@@ -5,10 +5,10 @@ import { ParentFamilyMapper } from "./parent-family.mapper";
 import { plainToInstance } from "class-transformer";
 
 export class StudentFamilyMapper{
-    static toDomain(studentFamilySchema: StudentFamilySchema): StudentFamilyEntity {
+    static toDomain(studentFamilySchema: StudentFamilySchema | null): StudentFamilyEntity {
         const studentFamilyEntity = plainToInstance(StudentFamilyEntity, studentFamilySchema);
 
-        if(studentFamilySchema === undefined) return studentFamilyEntity;
+        if(studentFamilySchema === undefined || studentFamilySchema === null) return studentFamilyEntity;
 
         studentFamilyEntity.parentFamily = ParentFamilyMapper.toDomain(studentFamilySchema.parentFamily);
         studentFamilyEntity.student = StudentMapper.toDomain(studentFamilySchema.student)
@@ -16,10 +16,10 @@ export class StudentFamilyMapper{
         return studentFamilyEntity;
     }
 
-    static toPersistence(studentFamilyEntity: StudentFamilyEntity): StudentFamilySchema {
+    static toPersistence(studentFamilyEntity: StudentFamilyEntity | null): StudentFamilySchema {
         const studentFamilySchema = plainToInstance(StudentFamilySchema, studentFamilyEntity);
 
-        if(studentFamilyEntity === undefined) return studentFamilySchema;
+        if(studentFamilyEntity === undefined || studentFamilyEntity === null) return studentFamilySchema;
 
         studentFamilySchema.parentFamily = ParentFamilyMapper.toPersistence(studentFamilyEntity.parentFamily);
         studentFamilySchema.student = StudentMapper.toPersistence(studentFamilyEntity.student)
@@ -27,7 +27,9 @@ export class StudentFamilyMapper{
         return studentFamilySchema;
     }
 
-    static toDomainList(studentFamiliesSchema: StudentFamilySchema[]): StudentFamilyEntity[]{
+    static toDomainList(studentFamiliesSchema: StudentFamilySchema[]): StudentFamilyEntity[] | undefined{
+        if(studentFamiliesSchema === undefined || studentFamiliesSchema === null)
+            return undefined;
         return studentFamiliesSchema?.map((studentFamilySchema) => this.toDomain(studentFamilySchema));
     }
 

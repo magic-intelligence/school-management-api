@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 import { StudentFamilySchema } from "../schemas";
 import { InjectRepository } from "@nestjs/typeorm";
 import { StudentFamilyMapper } from "../mappers/student-family.mapper";
-import { BadRequestException } from "@nestjs/common";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 import { Transactional } from "src/infraestructure/database/typeorm/transactions/transactional.decorator";
 import { handlerExceptionError } from "src/shared/exceptions/handler.exception.error";
 
@@ -28,8 +28,29 @@ export class StudentFamilyRepositoryImpl implements StudentFamilyRepository{
     findAll(): Promise<StudentFamilyEntity[]> {
         throw new Error("Method not implemented.");
     }
-    findById(id: string): Promise<StudentFamilyEntity> {
+    
+    async findById(id: string): Promise<StudentFamilyEntity> {
         throw new Error("Method not implemented.");
+    }
+    async findAllByStudentId(id: string): Promise<StudentFamilyEntity[]> {
+        try {
+            const studentFamiliesSchema:StudentFamilySchema[] = await this.studentRepository.find({
+                where: {
+                    studentId: id
+                },
+                relations: ['parentFamily', 'parentFamily.person', 'parentFamily.relationship']
+            });
+
+            const students = StudentFamilyMapper.toDomainList(studentFamiliesSchema);
+
+            if(students?.length === 0 )
+               throw new NotFoundException(`student with id ${id} not found in the database`);
+            return students || [];
+        
+        } catch (error) {
+            return handlerExceptionError(error);
+        }
+
     }
     delete(id: string): Promise<void> {
         throw new Error("Method not implemented.");

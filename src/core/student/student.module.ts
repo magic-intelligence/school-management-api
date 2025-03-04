@@ -9,6 +9,7 @@ import { PersonModule } from "../person/person.module";
 import { BasicInformationStudentFacade } from "./application/facades/basic.information.student.facade";
 import { StudentFamilyModule } from "../student-family/student-family.module";
 import { TransactionModule } from "src/infraestructure/database/typeorm/transactions/transaction.module";
+import { EmergencyContactUseCase } from "./application/use-cases/emergency.contact.use.case";
 
 
 @Module({
@@ -24,7 +25,8 @@ import { TransactionModule } from "src/infraestructure/database/typeorm/transact
             useClass: StudentRepositoryImpl
         },
         BasicInformationStudentUseCase,
-        BasicInformationStudentFacade
+        BasicInformationStudentFacade,
+        EmergencyContactUseCase,
      ],
     controllers:[ StudentController ],
     exports:[]

@@ -5,5 +5,8 @@ export const handlerExceptionError = (error)=>{
     if(error.code === '23503')
         throw new NotFoundException(error.detail);
 
+    if(error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+
     throw new Error(error.detail);
 }
