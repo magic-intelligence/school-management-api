@@ -6,7 +6,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { StudentSchema } from "../schemas/student.schema";
 import { StudentMapper } from "../mappers/student.mapper";
 import { Transactional } from "src/infraestructure/database/typeorm/transactions/transactional.decorator";
-import { handlerExceptionRepository } from "src/shared/exceptions/handler.exception.repositories";
+import { handlerExceptionError } from "src/shared/exceptions/handler.exception.error";
 
 @Injectable()
 export class StudentRepositoryImpl implements StudentRepository{
@@ -24,7 +24,7 @@ export class StudentRepositoryImpl implements StudentRepository{
             const savedEntity = await repo.save(persistenceEntity);
             return StudentMapper.toDomain(savedEntity);
         } catch (error) {
-            return handlerExceptionRepository(error);
+            return handlerExceptionError(error);
         }
     }
     

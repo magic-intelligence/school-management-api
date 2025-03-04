@@ -6,6 +6,7 @@ import { PersonSchema } from "../schemas/person.schema";
 import { InjectRepository } from "@nestjs/typeorm";
 import { PersonMapper } from "../mappers/person.mapper";
 import { Transactional } from "src/infraestructure/database/typeorm/transactions/transactional.decorator";
+import { handlerExceptionError } from "src/shared/exceptions/handler.exception.error";
 
 @Injectable()
 export class PersonRepositoryImpl implements PersonRepository{
@@ -25,8 +26,7 @@ export class PersonRepositoryImpl implements PersonRepository{
 
             return PersonMapper.toDomain( savedEntity );
         } catch (error) {
-            console.error(error)
-            throw new BadRequestException(error.detail);
+            return handlerExceptionError(error);
         }
     }
     findAll(): Promise<PersonEntity[]> {
