@@ -10,6 +10,7 @@ import { BasicInformationStudentFacade } from "./application/facades/basic.infor
 import { StudentFamilyModule } from "../student-family/student-family.module";
 import { TransactionModule } from "src/infraestructure/database/typeorm/transactions/transaction.module";
 import { EmergencyContactUseCase } from "./application/use-cases/emergency.contact.use.case";
+import { EmergencyContactModule } from "../emergency-contact/emergency-contact.module";
 
 
 @Module({
@@ -17,7 +18,8 @@ import { EmergencyContactUseCase } from "./application/use-cases/emergency.conta
         TypeOrmModule.forFeature([StudentSchema]),
         PersonModule,
         StudentFamilyModule,
-        TransactionModule
+        TransactionModule,
+        EmergencyContactModule
     ],
     providers:[
         {

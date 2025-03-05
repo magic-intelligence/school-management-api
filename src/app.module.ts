@@ -1,3 +1,4 @@
+import { EmergencyContactModule } from './core/emergency-contact/emergency-contact.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeormConfigModule } from './infraestructure/database/typeorm/typeorm.module';
@@ -7,11 +8,12 @@ import { TransactionModule } from './infraestructure/database/typeorm/transactio
 
 @Module({
   imports: [
+    EmergencyContactModule,
     ConfigModule.forRoot(),
     TypeormConfigModule,
     StudentModule,
     PersonModule,
-    TransactionModule
-  ]
+    TransactionModule,
+  ],
 })
 export class AppModule {}
