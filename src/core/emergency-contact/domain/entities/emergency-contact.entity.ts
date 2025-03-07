@@ -2,6 +2,7 @@ import { StudentFamilyEntity } from "src/core/student-family/domain/entities/stu
 import { BaseEntity } from "src/shared/types/entities/base.entity";
 
 export class EmergencyContactEntity extends BaseEntity{
+    emergencyContactId: string;
     studentFamilyId: string;
     priorityLevel: number;
     studentFamily: StudentFamilyEntity;

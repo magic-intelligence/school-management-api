@@ -4,12 +4,12 @@ import { plainToInstance } from "class-transformer";
 
 
 export class FamilyStatusMapper{
-    static toDomain(familyStatusSchema: FamilyStatusSchema): FamilyStatusEntity{
+    static toDomain(familyStatusSchema?: FamilyStatusSchema): FamilyStatusEntity{
         const entity = plainToInstance(FamilyStatusEntity, familyStatusSchema);
         return entity;
     }
 
-    static toPersistence(familyStatusEntity: FamilyStatusEntity): FamilyStatusSchema{
+    static toPersistence(familyStatusEntity?: FamilyStatusEntity): FamilyStatusSchema{
         const schema = plainToInstance(FamilyStatusSchema, familyStatusEntity);
         return schema;
     }

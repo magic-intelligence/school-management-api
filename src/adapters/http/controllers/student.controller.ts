@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Post } from "@nestjs/common";
-import { BasicInformationStudentDTO } from "../dtos/student/basic.information.student.dto";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { BasicInformationStudentFacade } from "src/core/student/application/facades/basic.information.student.facade";
 import { EmergencyContactUseCase } from "src/core/student/application/use-cases/emergency.contact.use.case";
 import { CreateEmergencyContactDTO } from "../dtos/emergency-contact/create.emergency-contcat.dto";
+import { CreateStudentDTO } from "../dtos/student/create.student.dto";
 
 @Controller('students')
 export class StudentController{
@@ -12,7 +12,7 @@ export class StudentController{
     ){}
 
     @Post('basic-information')
-    async register(@Body() dto: BasicInformationStudentDTO){
+    async register(@Body() dto: CreateStudentDTO){
         return await this.basicInformationStudentFacade.saveStudent(dto);
     }
     @Post('emergency-contact')
@@ -21,7 +21,7 @@ export class StudentController{
     }
 
     @Get(':studentId/family')
-    async findAll(@Param('studentId', ParseUUIDPipe) studentId: string){
+    async findAll(@Param('studentId',) studentId: string){
         return this.emergencyContactUseCase.findFamilyByIdForStudent(studentId);
     }
 }

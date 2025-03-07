@@ -5,7 +5,6 @@ import { StudentRepositoryImpl } from "src/adapters/persistence/repositories/stu
 import { BasicInformationStudentUseCase } from "./application/use-cases/basic.information.student.use.case";
 import { StudentController } from "src/adapters/http/controllers/student.controller";
 import { StudentSchema } from "src/adapters/persistence/schemas/student.schema";
-import { PersonModule } from "../person/person.module";
 import { BasicInformationStudentFacade } from "./application/facades/basic.information.student.facade";
 import { StudentFamilyModule } from "../student-family/student-family.module";
 import { TransactionModule } from "src/infraestructure/database/typeorm/transactions/transaction.module";
@@ -16,7 +15,6 @@ import { EmergencyContactModule } from "../emergency-contact/emergency-contact.m
 @Module({
     imports: [
         TypeOrmModule.forFeature([StudentSchema]),
-        PersonModule,
         StudentFamilyModule,
         TransactionModule,
         EmergencyContactModule

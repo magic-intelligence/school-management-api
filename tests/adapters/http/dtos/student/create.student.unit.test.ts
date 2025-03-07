@@ -7,7 +7,6 @@ const createStudentDTO = new CreateStudentDTO();
     createStudentDTO.entryTime= '12:30';
     createStudentDTO.exitTime= '12:30';
     createStudentDTO.familyStatusId= '45a7fc8b-f96e-4a22-be0d-0c74fde0ad3e';
-    createStudentDTO.personId= '45a7fc8b-f96e-4a22-be0d-0c74fde0ad3e';
     createStudentDTO.allergyDescription= undefined;
     createStudentDTO.nickname= 'TestPrueba';
 

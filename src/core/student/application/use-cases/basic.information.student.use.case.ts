@@ -14,12 +14,17 @@ export class BasicInformationStudentUseCase{
 
         const student = new StudentEntity();
         student.nickname = dto.nickname;
+        student.name = dto.name;
+        student.paternalSurname = dto.paternalSurname;
+        student.maternalSurname = dto.maternalSurname;
+        student.gender = dto.gender;
         student.entryTime = dto.entryTime;
         student.exitTime = dto.exitTime;
         student.brothersNumber = dto.brothersNumber;
         student.familyStatusId = dto.familyStatusId;
         student.entryTime = dto.entryTime;
-        student.personId = dto.personId;
+        student.branchId = dto.branchId;
+        student.birthday = dto.birthday;
         
         return this.studentRepository.save(student);
     }

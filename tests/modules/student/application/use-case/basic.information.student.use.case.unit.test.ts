@@ -1,4 +1,3 @@
-import { validate } from "class-validator";
 import { CreateStudentDTO } from "../../../../../src/adapters/http/dtos/student/create.student.dto";
 import { BasicInformationStudentUseCase } from "../../../../../src/core/student/application/use-cases/basic.information.student.use.case";
 import { StudentRepository } from "../../../../../src/core/student/domain/repositories/student.repository";
@@ -12,7 +11,6 @@ describe('Informacion básica del estudiante',()=>{
     dto.entryTime= '49:30';
     dto.exitTime= '12:30';
     dto.familyStatusId= '45a7fc8b-f96e-4a22-be0d-0c74fde0ad3e';
-    dto.personId= '343';
     dto.allergyDescription= undefined;
     dto.nickname= 'TestPrueba';
 

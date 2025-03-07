@@ -3,6 +3,7 @@ import { StudentEntity } from "src/core/student/domain/entities/student.entity";
 import { BaseEntity } from "src/shared/types/entities/base.entity";
 
 export class StudentFamilyEntity extends BaseEntity{
+    studentFamilyId: string;
     studentId: string;
     parentFamilyId: string;
     parentFamily: ParentFamilyEntity;

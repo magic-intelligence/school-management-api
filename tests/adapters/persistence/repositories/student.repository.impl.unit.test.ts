@@ -53,7 +53,6 @@ describe('StudentRepositoryImpl', () => {
       student.entryTime= '12:30';
       student.exitTime= '12:30';
       student.familyStatusId= '45a7fc8b-f96e-4a22-be0d-0c74fde0ad3e';
-      student.personId= '45a7fc8b-f96e-4a22-be0d-0c74fde0ad3e';
       student.allergyDescription= undefined;
       student.nickname= 'TestPrueba'
 

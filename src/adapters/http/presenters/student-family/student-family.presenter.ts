@@ -3,12 +3,12 @@ import { StudentFamilyEntity } from "src/core/student-family/domain/entities/stu
 export class StudentFamilyPresenter {
     static toHttp(studentFamily: StudentFamilyEntity){
         return {
-            id: studentFamily.id,
+            id: studentFamily.studentFamilyId,
             studentId: studentFamily.studentId,
             parentFamily:{
-                name: studentFamily.parentFamily.person.name,
-                paternalSurname: studentFamily.parentFamily.person.paternalSurname,
-                maternalSurname: studentFamily.parentFamily.person.maternalSurname,
+                name: studentFamily.parentFamily.name,
+                paternalSurname: studentFamily.parentFamily.paternalSurname,
+                maternalSurname: studentFamily.parentFamily.maternalSurname,
                 relationship: studentFamily.parentFamily.relationship.name,
                 description: studentFamily.parentFamily.relationship.description,
             }

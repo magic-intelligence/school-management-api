@@ -29,8 +29,7 @@ export class StudentRepositoryImpl implements StudentRepository{
     }
     
     async findAll(): Promise<StudentEntity[]> {
-        const studentsPersistence = await this.studentRepository.find();
-        return StudentMapper.toDomainList(studentsPersistence);
+        throw new Error("Method not implemented.");
     }
     findById(id: string): Promise<StudentEntity> {
         throw new Error("Method not implemented.");

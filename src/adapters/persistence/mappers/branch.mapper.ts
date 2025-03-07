@@ -1,17 +1,19 @@
 import { BranchEntity } from "src/core/branch/domain/entities/branch.entity";
 import { BranchSchema } from "../schemas";
-import { PersonMapper } from "./person.mapper";
 import { AddressMapper } from "./address.mapper";
 import { plainToInstance } from "class-transformer";
+import { StudentMapper } from "./student.mapper";
+import { ParentFamilyMapper } from "./parent-family.mapper";
 
 export class BranchMapper{
-    static toDomain(branchSchema: BranchSchema): BranchEntity {
+    static toDomain(branchSchema?: BranchSchema): BranchEntity {
 
         const branchEntity = plainToInstance(BranchEntity, branchSchema);
 
-        if(branchSchema === undefined) return branchEntity;
+        if(!branchSchema) return branchEntity;
 
-        branchEntity.persons = PersonMapper.toDomainList(branchSchema.persons);
+        branchEntity.students = StudentMapper.toDomainList(branchSchema.students);
+        branchSchema.parentFamilies = ParentFamilyMapper.toDomainList(branchSchema.parentFamilies);
         branchEntity.address = AddressMapper.toDomain(branchSchema.address);
         return branchEntity;
     }
@@ -19,10 +21,11 @@ export class BranchMapper{
     static toPersistence(branchEntity: BranchEntity): BranchSchema {
         const branchSchema = plainToInstance(BranchSchema, branchEntity);
 
-        if(branchEntity === undefined ) return branchSchema;
+        if(!branchEntity ) return branchSchema;
 
-        branchSchema.persons = PersonMapper?.toPersistenceList(branchEntity.persons);
-        branchSchema.address = AddressMapper?.toPersistence(branchEntity.address);
+        branchSchema.students = StudentMapper.toPersistenceList(branchEntity.students);
+        branchSchema.parentFamilies = ParentFamilyMapper.toPersistenceList(branchEntity.parentFamilies);
+        branchSchema.address = AddressMapper.toPersistence(branchEntity.address);
         return branchSchema;
     }
     

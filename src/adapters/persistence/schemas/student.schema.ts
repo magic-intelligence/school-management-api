@@ -1,13 +1,30 @@
-import { Column, Entity as Schema, JoinColumn, OneToMany, OneToOne } from "typeorm";
+import { Column, Entity as Schema, JoinColumn, OneToMany, OneToOne, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BaseSchema } from "../../../infraestructure/database/typeorm/base/base.schema";
-import { PersonSchema } from "./person.schema";
 import { StudentFamilySchema } from "./student-family.schema";
 import { FamilyStatusSchema } from "./family-status.schema";
+import { PersonGender } from "src/shared/value-object/person.gender";
+import { BranchSchema } from "./branch.schema";
 
 @Schema({name: 'student'})
 export class StudentSchema extends BaseSchema{
+    @PrimaryGeneratedColumn('increment', {name: 'student_id', type: 'bigint'})
+    studentId: string;
+    @Column({name: 'family_status_id', type: 'bigint', nullable: false})
+    familyStatusId: string;
+    @Column({name: 'branch_id', type: 'bigint', nullable: false})
+    branchId: string;
+    @Column({name: 'name', nullable: false})
+    name: string;
+    @Column({name: 'paternal_surname', nullable: false})
+    paternalSurname: string;
+    @Column({name: 'maternal_surname', nullable: false})
+    maternalSurname: string;
     @Column({name: 'nickname', type: 'varchar', nullable: true})
     nickname?: string;
+    @Column({name: 'birthday', type: 'date', nullable: true})
+    birthday?: Date;
+    @Column({name: 'gender', type: 'enum', enum: PersonGender, nullable: false})
+    gender: PersonGender;
     @Column({name: 'grace_minutes', type: 'int', nullable: true})
     graceMinutes?: number;
     @Column({name: 'enrollment_mount', type: 'double precision', nullable: true})
@@ -31,19 +48,12 @@ export class StudentSchema extends BaseSchema{
     @Column({name: 'allergy_description', type: 'text', nullable: true})
     allergyDescription?: string;
    
-    @Column({name: 'family_status_id', type: 'uuid', nullable: false, unique: false})
-    familyStatusId: string;
-    @Column({name: 'person_id', type: 'uuid', nullable: false})
-    personId: string;
-
+    @ManyToOne(()=> BranchSchema, (branch)=> branch.students)
+    @JoinColumn({name: 'branch_id'})
+    branch: BranchSchema;
     @OneToOne(()=> FamilyStatusSchema)
     @JoinColumn({name: 'family_status_id'})
     familyStatus: FamilyStatusSchema;
-    
-    @OneToOne(()=> PersonSchema)
-    @JoinColumn({name: 'person_id'})
-    person: PersonSchema;
-
     @OneToMany(()=> StudentFamilySchema, (studentFamily)=> studentFamily.student)
     studentFamilies?: StudentFamilySchema[];
 

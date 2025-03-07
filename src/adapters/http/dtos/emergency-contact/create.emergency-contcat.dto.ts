@@ -1,8 +1,9 @@
-import { IsInt, IsNotEmpty, IsPositive, IsUUID } from "class-validator";
+import { IsInt, IsNotEmpty, IsPositive, IsString, IsUUID, Matches } from "class-validator";
 
 export class CreateEmergencyContactDTO{
-    @IsUUID()
     @IsNotEmpty()
+    @IsString()
+    @Matches(/^\d+$/, { message: 'studentFamilyId must be a positive integer' })
     studentFamilyId: string;
     @IsPositive()
     @IsInt()

@@ -3,11 +3,11 @@ import { RelationshipSchema } from "../schemas";
 import { plainToInstance } from "class-transformer";
 
 export class RelationshipMapper {
-    static toDomain(relationshipSchema: RelationshipSchema): RelationShipEntity {
+    static toDomain(relationshipSchema?: RelationshipSchema): RelationShipEntity {
         return plainToInstance(RelationShipEntity, relationshipSchema);
     }
 
-    static toPersistence(relationshipEntity: RelationShipEntity): RelationshipSchema {
+    static toPersistence(relationshipEntity?: RelationShipEntity): RelationshipSchema {
         return plainToInstance(RelationshipSchema, relationshipEntity);
     }
 }

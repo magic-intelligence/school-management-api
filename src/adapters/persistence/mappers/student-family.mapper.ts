@@ -5,10 +5,10 @@ import { ParentFamilyMapper } from "./parent-family.mapper";
 import { plainToInstance } from "class-transformer";
 
 export class StudentFamilyMapper{
-    static toDomain(studentFamilySchema: StudentFamilySchema | null): StudentFamilyEntity {
+    static toDomain(studentFamilySchema?: StudentFamilySchema): StudentFamilyEntity {
         const studentFamilyEntity = plainToInstance(StudentFamilyEntity, studentFamilySchema);
 
-        if(studentFamilySchema === undefined || studentFamilySchema === null) return studentFamilyEntity;
+        if( !studentFamilySchema ) return studentFamilyEntity;
 
         studentFamilyEntity.parentFamily = ParentFamilyMapper.toDomain(studentFamilySchema.parentFamily);
         studentFamilyEntity.student = StudentMapper.toDomain(studentFamilySchema.student)
@@ -16,10 +16,10 @@ export class StudentFamilyMapper{
         return studentFamilyEntity;
     }
 
-    static toPersistence(studentFamilyEntity: StudentFamilyEntity | null): StudentFamilySchema {
+    static toPersistence(studentFamilyEntity?: StudentFamilyEntity): StudentFamilySchema {
         const studentFamilySchema = plainToInstance(StudentFamilySchema, studentFamilyEntity);
 
-        if(studentFamilyEntity === undefined || studentFamilyEntity === null) return studentFamilySchema;
+        if( !studentFamilyEntity ) return studentFamilySchema;
 
         studentFamilySchema.parentFamily = ParentFamilyMapper.toPersistence(studentFamilyEntity.parentFamily);
         studentFamilySchema.student = StudentMapper.toPersistence(studentFamilyEntity.student)
@@ -27,13 +27,11 @@ export class StudentFamilyMapper{
         return studentFamilySchema;
     }
 
-    static toDomainList(studentFamiliesSchema: StudentFamilySchema[]): StudentFamilyEntity[] | undefined{
-        if(studentFamiliesSchema === undefined || studentFamiliesSchema === null)
-            return undefined;
+    static toDomainList(studentFamiliesSchema?: StudentFamilySchema[]): StudentFamilyEntity[]| undefined{
         return studentFamiliesSchema?.map((studentFamilySchema) => this.toDomain(studentFamilySchema));
     }
 
-    static toPersistenceList(studentFamiliesEntity: StudentFamilyEntity[]): StudentFamilySchema[]{
+    static toPersistenceList(studentFamiliesEntity?: StudentFamilyEntity[]): StudentFamilySchema[]| undefined{
         return studentFamiliesEntity?.map((studentFamilyEntity) => this.toPersistence(studentFamilyEntity));
     }
 }
