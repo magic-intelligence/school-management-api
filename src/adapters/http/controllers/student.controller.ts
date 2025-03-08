@@ -3,6 +3,7 @@ import { BasicInformationStudentFacade } from "src/core/student/application/faca
 import { EmergencyContactUseCase } from "src/core/student/application/use-cases/emergency.contact.use.case";
 import { CreateEmergencyContactDTO } from "../dtos/emergency-contact/create.emergency-contcat.dto";
 import { CreateStudentDTO } from "../dtos/student/create.student.dto";
+import { BigIntValidationPipe } from "../pipes/bigint.validation.pipe";
 
 @Controller('students')
 export class StudentController{
@@ -21,7 +22,7 @@ export class StudentController{
     }
 
     @Get(':studentId/family')
-    async findAll(@Param('studentId',) studentId: string){
+    async findAll(@Param('studentId', BigIntValidationPipe) studentId: string){
         return this.emergencyContactUseCase.findFamilyByIdForStudent(studentId);
     }
 }
